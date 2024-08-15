@@ -1,4 +1,4 @@
-# refurbished phone selling website
+# Refurbished phone selling website
 
 ## Necessary packages 
 - React
