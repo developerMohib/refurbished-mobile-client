@@ -5,6 +5,8 @@
 - React Router Dom
 - Tailwind 
 - DaisyUi
+- React icon
+- Flowbite-react
 
 ## For Authentication
 - Firebase
