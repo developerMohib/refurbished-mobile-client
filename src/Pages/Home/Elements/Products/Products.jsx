@@ -3,38 +3,20 @@ import slider1 from "../../../../assets/slider1.png";
 import { Accordion } from "flowbite-react";
 import { useState } from "react";
 const Products = () => {
-    const [value, setValue] = useState(500);
-    const handlePrice = (e)=>{
-        console.log('value ', e.target.value)
-        setValue(e.target.value)
-    }
+  const [value, setValue] = useState(500);
+  const handlePrice = (e) => {
+    console.log("value ", e.target.value);
+    setValue(e.target.value);
+  };
   return (
     <div className="px-4">
-      <div className="flex justify-between my-10">
-        <div>
-          <h1>Lets find a phone</h1>
-          <div className="flex items-center">
-            <select
-              name="Brand"
-              id="brand"
-              className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-            >
-              <option value="">Brand</option>
-              <option value="iphone">Iphone</option>
-              <option value="readmi">Readmi</option>
-              <option value="vivo">Vivo</option>
-              <option value="oppo">Oppr</option>
-            </select>
-            <select
-              name="Category"
-              id="category"
-              className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-            >
-              <option value="">Category</option>
-              <option value="basic">Basic</option>
-              <option value="smartphone">Smart phone</option>
-              <option value="featurephone">Feature phone</option>
-            </select>
+      {/* test */}
+      <div className="md:grid grid-cols-3 gap-5 my-10">
+        {/* Price Range Here */}
+
+        <div className="col-span-2">
+          <div className="grid grid-cols-2 gap-5">
+            <div className="grid-cols-1 border border-slate-400 p-4">
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
               <h2 className="text-2xl font-bold mb-4">Range Slider</h2>
               <div className="mb-4">
@@ -45,7 +27,7 @@ const Products = () => {
                   Price Range
                 </label>
                 <input
-                onChange={handlePrice}
+                  onChange={handlePrice}
                   type="range"
                   id="price-range"
                   className="w-full accent-indigo-600"
@@ -59,31 +41,66 @@ const Products = () => {
                 <span id="maxPrice">{value}</span>
               </div>
             </div>
+            </div>
+
+            <div className="grid-cols-1 shadow-md border border-slate-400 p-4">
+              {/* Brand Filter */}
+              <div className="">
+                <select
+                  name="Brand"
+                  id="brand"
+                  className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                >
+                  <option value="">Brand</option>
+                  <option value="iphone">Iphone</option>
+                  <option value="readmi">Readmi</option>
+                  <option value="vivo">Vivo</option>
+                  <option value="oppo">Oppo</option>
+                </select>
+              </div>
+              {/* Category FIlter */}
+              <div className="">
+                    <select
+                      name="Brand"
+                      id="brand"
+                      className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                    >
+                      <option value="">Brand</option>
+                      <option value="iphone">Iphone</option>
+                      <option value="readmi">Readmi</option>
+                      <option value="vivo">Vivo</option>
+                      <option value="oppo">Oppo</option>
+                    </select>
+                  </div>
+              {/* Sorting */}
+              <div className="flex items-center">
+                <select
+                  name="Price"
+                  id="Price"
+                  className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                >
+                  <option value="">Default</option>
+                  <option value="HL">Latest Phone</option>
+                  <option value="HL">High to low</option>
+                  <option value="LH">Low to high</option>
+                </select>
+              </div>
+              
+            <button className="w-full bg-green-500 mt-5 ">Find Phone</button>
+            </div>
           </div>
         </div>
-        <div>
-          <div className="flex items-center">
-            <label
-              htmlFor="Price"
-              className="text-sm font-medium text-gray-900 mr-5"
-            >
-              {" "}
-              Price{" "}
-            </label>
 
-            <select
-              name="Price"
-              id="Price"
-              className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-            >
-              <option value="">Default</option>
-              <option value="HL">Latest Phone</option>
-              <option value="HL">High to low</option>
-              <option value="LH">Low to high</option>
-            </select>
+        {/* Here Latest Phone */}
+
+        <div className="grid-cols-1 border border-slate-400 p-4">
+          <div>
+            <h1> Latest Phone</h1>
           </div>
         </div>
       </div>
+      {/* test */}
+
       <div className="grid grid-cols-4 gap-4">
         <div className="grid-cols-1">
           {/* for designing category filtering */}
