@@ -4,7 +4,7 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 const Navbar = () => {
   return (
     <div className="px-4 mx-auto max-w-7xl sm:px-6">
-      <div className="relative pt-6 pb-16 sm:pb-24">
+      <div className="relative py-6">
         <nav
           className="relative flex items-center justify-between sm:h-10 md:justify-center"
           aria-label="Global"
@@ -82,18 +82,16 @@ const Navbar = () => {
           <div className="hidden md:flex md:space-x-10 list-none">
             <li>
               <Link
-                to=""
-                className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                target=""
+                to="/new-phone"
+                className="text-base font-normal text-gray-500 list-none hover:text-gray-900"                
               >
                 New Phone
               </Link>
             </li>
             <li>
               <Link
-                to=""
+                to="/refurbished"
                 className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                target=""
               >
                 Refurbished Phone
               </Link>
@@ -102,16 +100,14 @@ const Navbar = () => {
               <Link
                 to="/contact"
                 className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                target=""
               >
                 Contact Us
               </Link>
             </li>
             <li>
               <Link
-                to=""
+                to="/blog"
                 className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                target="_blank"
               >
                 Blog
               </Link>
@@ -127,10 +123,10 @@ const Navbar = () => {
                 />
               </div>
               <div>
-                <Link to="" className="inline-flex items-center px-4 py-2">
-                  <MdOutlineShoppingBag className="text-2xl mx-1" />
-                  <FaUser className="text-xl mx-1" />
-                </Link>
+                <div className="inline-flex items-center px-4 py-2">                  
+                  <Link> <MdOutlineShoppingBag className="text-2xl mx-1" /> </Link>
+                  <Link to="/login"> <FaUser className="text-xl mx-1" /> </Link>                  
+                </div>
               </div>
             </div>
           </div>
