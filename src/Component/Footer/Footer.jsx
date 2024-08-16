@@ -6,7 +6,6 @@ import { IoLogoInstagram } from "react-icons/io";
 const Footer = () => {
     const year = new Date();
     const fullYear = year.getFullYear() ;
-    console.log('full year', fullYear);
   return (
     <footer className="w-full bg-gray-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

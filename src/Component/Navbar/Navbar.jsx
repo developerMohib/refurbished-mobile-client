@@ -1,7 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { IoMdLogOut } from "react-icons/io";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+ 
+  const navigate = useNavigate();
+
+  // log out function
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("log out successfully");
+      // window.location.reload()
+      navigate("/", { replace: true });
+    });
+  }
   return (
     <div className="px-4 mx-auto max-w-7xl sm:px-6">
       <div className="relative py-6">
@@ -83,7 +98,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/new-phone"
-                className="text-base font-normal text-gray-500 list-none hover:text-gray-900"                
+                className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
               >
                 New Phone
               </Link>
@@ -123,9 +138,26 @@ const Navbar = () => {
                 />
               </div>
               <div>
-                <div className="inline-flex items-center px-4 py-2">                  
-                  <Link> <MdOutlineShoppingBag className="text-2xl mx-1" /> </Link>
-                  <Link to="/login"> <FaUser className="text-xl mx-1" /> </Link>                  
+                <div className="inline-flex items-center px-4 py-2">
+                  <Link>
+                    {" "}
+                    <MdOutlineShoppingBag className="text-2xl mx-1" />{" "}
+                  </Link>
+                  {user ? (
+                    <>
+                    <div className="avatar">
+                      <div className="w-10 rounded-full">
+                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                      </div>
+                    </div>
+                    <IoMdLogOut className="text-2xl cursor-pointer mx-2" onClick={handleLogOut}/>
+                    </>
+                  ) : (
+                    <Link to="/login">
+                      {" "}
+                      <FaUser className="text-xl mx-1" />{" "}
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

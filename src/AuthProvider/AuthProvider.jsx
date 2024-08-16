@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  updateCurrentUser,
+  updateProfile,
 } from "firebase/auth";
 
 const googleProvider = new GoogleAuthProvider();
@@ -17,6 +17,7 @@ export const AuthCustomContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  console.log('current user ', user)
 
   // sign up or create user
   const createUser = (email, password) => {
@@ -36,18 +37,25 @@ const AuthProvider = ({ children }) => {
     };
 
   // update profile
-  const userUpdate = (name, photoURL) => {
-    return updateCurrentUser(auth.currentUser ,{
-        displayName: name,
-        photoURL: photoURL,
-    })
+  const updateUser = (name, photoURL) => {
+    console.log('name and photo', name, photoURL);
+    return updateProfile(auth?.currentUser, {
+      displayName: name,
+      photoURL: photoURL,
+    });
   }
 
   // user observer
   useEffect(() => {
     const unsubscriber = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
+      if(currentUser){
+        setUser(currentUser);
+        setLoading(false);
+      }
+      else{
+        console.log('user sign out')
+        setLoading(false);
+      }
     });
     return () => unsubscriber();
   }, []);
@@ -58,7 +66,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   }
 
-  const userInfo = { createUser, loading, loginEmailPass, user, userUpdate, logOut,loginWithGoogle};
+  const userInfo = { createUser, loading, loginEmailPass, user, updateUser, logOut,loginWithGoogle};
   return (
     <AuthCustomContext.Provider value={userInfo}>
       {children}
