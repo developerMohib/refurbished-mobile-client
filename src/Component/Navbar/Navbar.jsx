@@ -4,6 +4,8 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { Tooltip } from 'react-tooltip'
+
 const Navbar = () => {
   const { user, logOut } = useAuth();
  
@@ -129,7 +131,7 @@ const Navbar = () => {
             </li>
           </div>
           <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
-            <div className="inline-flex rounded-full">
+            <div className="inline-flex items-center rounded-full">
               <div>
                 <input
                   type="text"
@@ -147,15 +149,16 @@ const Navbar = () => {
                     <>
                     <div className="avatar">
                       <div className="w-10 rounded-full">
-                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        <img data-tooltip-id="my-tooltip" data-tooltip-content={user?.displayName} src={user?.photoURL} />
                       </div>
                     </div>
-                    <IoMdLogOut className="text-2xl cursor-pointer mx-2" onClick={handleLogOut}/>
+                    <Tooltip id="my-tooltip" />
+                    <IoMdLogOut data-tooltip-id="my-tooltip" data-tooltip-content="Log Out!" className="text-2xl cursor-pointer mx-2" onClick={handleLogOut}/>
                     </>
                   ) : (
                     <Link to="/login">
                       {" "}
-                      <FaUser className="text-xl mx-1" />{" "}
+                      <FaUser data-tooltip-id="my-tooltip" data-tooltip-content="Log In !" className="text-xl mx-1" />{" "}
                     </Link>
                   )}
                 </div>

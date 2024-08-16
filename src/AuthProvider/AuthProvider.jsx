@@ -17,7 +17,6 @@ export const AuthCustomContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  console.log('current user ', user)
 
   // sign up or create user
   const createUser = (email, password) => {
@@ -38,7 +37,6 @@ const AuthProvider = ({ children }) => {
 
   // update profile
   const updateUser = (name, photoURL) => {
-    console.log('name and photo', name, photoURL);
     return updateProfile(auth?.currentUser, {
       displayName: name,
       photoURL: photoURL,

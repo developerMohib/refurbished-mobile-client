@@ -1,46 +1,53 @@
-import { Link } from "react-router-dom";
-import slider1 from "../../../../assets/slider1.png";
-import { Accordion } from "flowbite-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Accordion } from "flowbite-react";
+import useAuth from "../../../../Hooks/useAuth";
+import Loader from "../../../../Component/Loader/Loader";
+import useAllProducts from "../../../../Hooks/useAllProducts";
+
 const Products = () => {
   const [value, setValue] = useState(500);
+  const { loading } = useAuth();
+  const { products, isLoading } = useAllProducts();
   const handlePrice = (e) => {
     console.log("value ", e.target.value);
     setValue(e.target.value);
   };
+  if (isLoading || loading) {
+    <Loader />;
+  }
   return (
     <div className="px-4">
       {/* test */}
       <div className="md:grid grid-cols-3 gap-5 my-10">
         {/* Price Range Here */}
-
         <div className="col-span-2">
           <div className="grid grid-cols-2 gap-5">
             <div className="grid-cols-1 border border-slate-400 p-4">
-            <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-              <h2 className="text-2xl font-bold mb-4">Range Slider</h2>
-              <div className="mb-4">
-                <label
-                  htmlFor="price-range"
-                  className="block text-gray-700 font-bold mb-2"
-                >
-                  Price Range
-                </label>
-                <input
-                  onChange={handlePrice}
-                  type="range"
-                  id="price-range"
-                  className="w-full accent-indigo-600"
-                  min="7000"
-                  max="100000"
-                  value={value}
-                />
+              <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+                <h2 className="text-2xl font-bold mb-4">Range Slider</h2>
+                <div className="mb-4">
+                  <label
+                    htmlFor="price-range"
+                    className="block text-gray-700 font-bold mb-2"
+                  >
+                    Price Range
+                  </label>
+                  <input
+                    onChange={handlePrice}
+                    type="range"
+                    id="price-range"
+                    className="w-full accent-indigo-600"
+                    min="7000"
+                    max="100000"
+                    value={value}
+                  />
+                </div>
+                <div className="flex justify-between text-gray-500">
+                  <span id="minPrice">7000</span>
+                  <span id="maxPrice">{value}</span>
+                </div>
               </div>
-              <div className="flex justify-between text-gray-500">
-                <span id="minPrice">7000</span>
-                <span id="maxPrice">{value}</span>
-              </div>
-            </div>
             </div>
 
             <div className="grid-cols-1 shadow-md border border-slate-400 p-4">
@@ -60,18 +67,18 @@ const Products = () => {
               </div>
               {/* Category FIlter */}
               <div className="">
-                    <select
-                      name="Brand"
-                      id="brand"
-                      className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-                    >
-                      <option value="">Brand</option>
-                      <option value="iphone">Iphone</option>
-                      <option value="readmi">Readmi</option>
-                      <option value="vivo">Vivo</option>
-                      <option value="oppo">Oppo</option>
-                    </select>
-                  </div>
+                <select
+                  name="Brand"
+                  id="brand"
+                  className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                >
+                  <option value="">Brand</option>
+                  <option value="iphone">Iphone</option>
+                  <option value="readmi">Readmi</option>
+                  <option value="vivo">Vivo</option>
+                  <option value="oppo">Oppo</option>
+                </select>
+              </div>
               {/* Sorting */}
               <div className="flex items-center">
                 <select
@@ -85,8 +92,8 @@ const Products = () => {
                   <option value="LH">Low to high</option>
                 </select>
               </div>
-              
-            <button className="w-full bg-green-500 mt-5 ">Find Phone</button>
+
+              <button className="w-full bg-green-500 mt-5 ">Find Phone</button>
             </div>
           </div>
         </div>
@@ -188,104 +195,44 @@ const Products = () => {
           </Accordion>
           {/* for designing category filtering */}
         </div>
-        <div className="grid-cols-1">
-          <a
-            href="#"
-            className="relative block rounded-tr-3xl border border-gray-100"
-          >
-            <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-6 py-4 font-medium uppercase tracking-widest text-white">
-              Save 10%
-            </span>
+        <div className="col-span-3">
+          <div className="grid grid-cols-3 gap-4">
+            {products?.map((product) => (
+              <div key={product._id} className="col-span-1">
+                <Link
+                to="/"
+                  className="relative block rounded-tr-3xl border border-gray-100"
+                >
+                  <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-3 py-2 font-medium uppercase tracking-widest text-white">
+                    Save 10%
+                  </span>
 
-            <img
-              src={slider1}
-              alt=""
-              className="h-80 w-full rounded-bl-3xl rounded-tr-3xl border border-gray-300 object-cover"
-            />
+                  <img
+                    src={product.productImage}
+                    alt=""
+                    className="h-80 w-full rounded-bl-3xl rounded-tr-3xl border border-gray-300 object-cover"
+                  />
 
-            <div className="p-4 text-center">
-              <strong className="text-xl font-medium text-gray-900">
-                {" "}
-                Aloe Vera{" "}
-              </strong>
+                  <div className="p-4 text-center">
+                    <strong className="text-xl font-medium text-gray-900">
+                      {product.productName}
+                    </strong>
 
-              <p className="mt-2 text-pretty text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-                officia rem vel voluptatum in eum vitae aliquid at sed
-                dignissimos.
-              </p>
+                    <p className="mt-2 text-pretty text-gray-700">
+                    {product.description.slice(0, 70)}
+                    </p>
+                    <p className="mt-2 text-pretty text-gray-700">
+                    Price : {product.price} BDT
+                    </p>
 
-              <span className="mt-4 block rounded-md border border-indigo-900 bg-indigo-900 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
-                Learn More
-              </span>
-            </div>
-          </a>
-        </div>
-        <div className="grid-cols-1">
-          <a
-            href="#"
-            className="relative block rounded-tr-3xl border border-gray-100"
-          >
-            <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-6 py-4 font-medium uppercase tracking-widest text-white">
-              Save 10%
-            </span>
-
-            <img
-              src={slider1}
-              alt=""
-              className="h-80 w-full rounded-bl-3xl rounded-tr-3xl border border-gray-300 object-cover"
-            />
-
-            <div className="p-4 text-center">
-              <strong className="text-xl font-medium text-gray-900">
-                {" "}
-                Aloe Vera{" "}
-              </strong>
-
-              <p className="mt-2 text-pretty text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-                officia rem vel voluptatum in eum vitae aliquid at sed
-                dignissimos.
-              </p>
-
-              <span className="mt-4 block rounded-md border border-indigo-900 bg-indigo-900 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
-                Learn More
-              </span>
-            </div>
-          </a>
-        </div>
-        <div className="grid-cols-1">
-          <a
-            href="#"
-            className="relative block rounded-tr-3xl border border-gray-100"
-          >
-            <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-6 py-4 font-medium uppercase tracking-widest text-white">
-              Save 10%
-            </span>
-
-            <img
-              src={slider1}
-              alt=""
-              className="h-80 w-full rounded-bl-3xl rounded-tr-3xl border border-gray-300 object-cover"
-            />
-
-            <div className="p-4 text-center">
-              <strong className="text-xl font-medium text-gray-900">
-                {" "}
-                Aloe Vera{" "}
-              </strong>
-
-              <p className="mt-2 text-pretty text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-                officia rem vel voluptatum in eum vitae aliquid at sed
-                dignissimos.
-              </p>
-
-              <span className="mt-4 block rounded-md border border-indigo-900 bg-indigo-900 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
-                Learn More
-              </span>
-            </div>
-          </a>
+                    <span className="mt-4 block rounded-md border border-indigo-900 bg-indigo-900 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
+                      More
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

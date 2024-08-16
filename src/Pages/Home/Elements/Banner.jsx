@@ -9,7 +9,7 @@ import slider5 from "../../../assets/slider5.png";
 const Banner = () => {
   return (
     <div className="relative flex flex-col items-center max-w-screen-xl px-4 mx-auto md:flex-row sm:px-6 p-8">
-      <div className="flex items-center py-5 md:w-1/2 md:pb-20 md:pt-10 md:pr-10">
+      <div className="flex items-center md:w-1/2 md:pb-10 md:pr-10">
         <div className="text-left">
           <h2 className="text-4xl font-extrabold leading-10 tracking-tight text-gray-800 sm:text-5xl sm:leading-none md:text-6xl">
             Refurbished <br />
@@ -92,7 +92,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center py-5 md:w-1/2 md:pb-20 md:pt-10 md:pl-10">
+      <div className="flex items-center md:w-1/2 md:pb-10 md:pl-10">
         <div className="relative w-full p-3 rounded  md:p-8">
           <div className="rounded-lg  text-black w-full">
             <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
