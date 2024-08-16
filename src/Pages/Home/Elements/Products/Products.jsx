@@ -1,4 +1,5 @@
-import { useState } from "react";
+import "./products.css";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Accordion } from "flowbite-react";
 import useAuth from "../../../../Hooks/useAuth";
@@ -6,9 +7,11 @@ import Loader from "../../../../Component/Loader/Loader";
 import useAllProducts from "../../../../Hooks/useAllProducts";
 
 const Products = () => {
-  const [value, setValue] = useState(500);
   const { loading } = useAuth();
+  const [value, setValue] = useState(500);
+  const [isSticky, setIsSticky] = useState(false);
   const { products, isLoading } = useAllProducts();
+
   const handlePrice = (e) => {
     console.log("value ", e.target.value);
     setValue(e.target.value);
@@ -16,16 +19,33 @@ const Products = () => {
   if (isLoading || loading) {
     <Loader />;
   }
+  useEffect(() => {
+    const handleScroll = () => {
+      const bannerHeight = 300 ; 
+      const scrollPosition = window.scrollY;
+      setIsSticky(scrollPosition > bannerHeight);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+
   return (
     <div className="px-4">
       {/* test */}
-      <div className="md:grid grid-cols-3 gap-5 my-10">
+      <div
+        className={`md:grid grid-cols-3 gap-5 my-10 bg-gray-200 w-full z-50 sticky-section ${isSticky ? 'is-sticky' : ''} `}
+      >
         {/* Price Range Here */}
         <div className="col-span-2">
           <div className="grid grid-cols-2 gap-5">
             <div className="grid-cols-1 border border-slate-400 p-4">
-              <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-4">Range Slider</h2>
+              <div className="bg-white rounded-lg shadow-lg px-6 w-full max-w-md">
                 <div className="mb-4">
                   <label
                     htmlFor="price-range"
@@ -51,22 +71,22 @@ const Products = () => {
             </div>
 
             <div className="grid-cols-1 shadow-md border border-slate-400 p-4">
-              {/* Brand Filter */}
-              <div className="">
+              <div className="flex gap-3">
+                {/* Brand Filter */}
+              <div className="w-1/2">
                 <select
                   name="Brand"
                   id="brand"
                   className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                 >
-                  <option value="">Brand</option>
-                  <option value="iphone">Iphone</option>
-                  <option value="readmi">Readmi</option>
-                  <option value="vivo">Vivo</option>
-                  <option value="oppo">Oppo</option>
+                  <option value="">Category</option>
+                  <option value="basic">Basic</option>
+                  <option value="feature-phone">Feature Phone</option>
+                  <option value="smartphone">Smartphone</option>
                 </select>
               </div>
               {/* Category FIlter */}
-              <div className="">
+              <div className="w-1/2">
                 <select
                   name="Brand"
                   id="brand"
@@ -74,13 +94,21 @@ const Products = () => {
                 >
                   <option value="">Brand</option>
                   <option value="iphone">Iphone</option>
-                  <option value="readmi">Readmi</option>
+                  <option value="redmi">Redmi</option>
                   <option value="vivo">Vivo</option>
                   <option value="oppo">Oppo</option>
                 </select>
               </div>
+              </div>
+
+              <button className="w-full bg-green-500 mt-5 ">Find Phone</button>
+            </div>
+          </div>
+        </div>
+        
               {/* Sorting */}
-              <div className="flex items-center">
+        <div className="grid-cols-1 border border-slate-400 p-4">
+        <div className="flex items-center">
                 <select
                   name="Price"
                   id="Price"
@@ -92,18 +120,6 @@ const Products = () => {
                   <option value="LH">Low to high</option>
                 </select>
               </div>
-
-              <button className="w-full bg-green-500 mt-5 ">Find Phone</button>
-            </div>
-          </div>
-        </div>
-
-        {/* Here Latest Phone */}
-
-        <div className="grid-cols-1 border border-slate-400 p-4">
-          <div>
-            <h1> Latest Phone</h1>
-          </div>
         </div>
       </div>
       {/* test */}
@@ -197,10 +213,10 @@ const Products = () => {
         </div>
         <div className="col-span-3">
           <div className="grid grid-cols-3 gap-4">
-            {products?.map((product) => (
+            {products?.slice(0,6).map((product) => (
               <div key={product._id} className="col-span-1">
                 <Link
-                to="/"
+                  to="/"
                   className="relative block rounded-tr-3xl border border-gray-100"
                 >
                   <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-3 py-2 font-medium uppercase tracking-widest text-white">
@@ -219,13 +235,13 @@ const Products = () => {
                     </strong>
 
                     <p className="mt-2 text-pretty text-gray-700">
-                    {product.description.slice(0, 70)}
+                      {product.description.slice(0, 70)}
                     </p>
                     <p className="mt-2 text-pretty text-gray-700">
-                    Price : {product.price} BDT
+                      Price : {product.price} BDT
                     </p>
 
-                    <span className="mt-4 block rounded-md border border-indigo-900 bg-indigo-900 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
+                    <span className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
                       More
                     </span>
                   </div>
