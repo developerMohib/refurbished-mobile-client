@@ -72,6 +72,12 @@ const Login = () => {
               >
                 Login
               </button>
+              <p className="text-center my-3">Or</p>
+              <button
+                className="block w-full py-2 text-center text-white bg-teal-500 border border-teal-500 rounded hover:bg-transparent hover:text-teal-500 transition uppercase font-roboto font-medium"
+              >
+                Login with google
+              </button>
               <div className="flex gap-2 pt-5">
                 <p className="text-gray-600 text-sm">Dont have an account?</p>
                 <Link className="text-gray-600 text-sm underline" to="/register">
