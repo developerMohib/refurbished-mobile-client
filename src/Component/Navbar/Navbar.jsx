@@ -4,21 +4,100 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
-import { Tooltip } from 'react-tooltip'
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
- 
   const navigate = useNavigate();
 
   // log out function
   const handleLogOut = () => {
     logOut().then(() => {
       toast.success("log out successfully");
-      // window.location.reload()
+      window.location.reload();
       navigate("/", { replace: true });
     });
-  }
+  };
+
+  const navbarLinks = (
+    <>
+      <li>
+        <Link
+          to="/new-phone"
+          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+        >
+          New Phone
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/refurbished"
+          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+        >
+          Refurbished Phone
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/contact"
+          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+        >
+          Contact Us
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/blog"
+          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+        >
+          Blog
+        </Link>
+      </li>
+    </>
+  );
+  const searchBox = (
+    <>
+      <input
+        type="text"
+        className="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+        placeholder="Search"
+      />
+    </>
+  );
+  const loginUser = (
+    <>
+      {user ? (
+        <>
+          <div className="avatar">
+            <div className="w-10 rounded-full">
+              <img
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content={user?.displayName}
+                src={user?.photoURL}
+              />
+            </div>
+          </div>
+          <Tooltip id="my-tooltip" />
+          <IoMdLogOut
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Log Out!"
+            className="text-2xl cursor-pointer mx-2"
+            onClick={handleLogOut}
+          />
+        </>
+      ) : (
+        <Link to="/login">
+          {" "}
+          <FaUser
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Log In !"
+            className="text-xl mx-1"
+          />{" "}
+        </Link>
+      )}
+    </>
+  );
+
   return (
     <div className="px-4 mx-auto max-w-7xl sm:px-6">
       <div className="relative py-6">
@@ -76,91 +155,67 @@ const Navbar = () => {
                 </div>
               </Link>
               <div className="flex items-center -mr-2 md:hidden">
+                {searchBox}
+
                 <button
                   className="inline-flex items-center justify-center p-2 text-gray-400 bg-gray-50 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-50"
                   type="button"
                   aria-expanded="false"
                 >
                   <span className="sr-only">Open main menu</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                    className="w-6 h-6"
-                  >
-                    <path d="M4 6h16M4 12h16M4 18h16"></path>
-                  </svg>
+
+                  <div className="drawer z-50 ">
+                    <input
+                      id="my-drawer"
+                      type="checkbox"
+                      className="drawer-toggle"
+                    />
+                    <div className="drawer-content">
+                      {/* Page content here */}
+                      <label htmlFor="my-drawer" className="drawer-button">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                          className="w-6 h-6 text-black "
+                        >
+                          <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                      </label>
+                    </div>
+
+                    <div className="drawer-side">
+                      <label
+                        htmlFor="my-drawer"
+                        aria-label="close sidebar"
+                        className="drawer-overlay"
+                      ></label>
+                      <ul className="menu bg-base-200 text-base-content min-h-full flex  w-80 p-4">
+                        {/* Sidebar content here */}
+                        {navbarLinks}                        
+                  {loginUser}
+                      </ul>
+                    </div>
+                  </div>
                 </button>
               </div>
             </div>
           </div>
           <div className="hidden md:flex md:space-x-10 list-none">
-            <li>
-              <Link
-                to="/new-phone"
-                className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-              >
-                New Phone
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/refurbished"
-                className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-              >
-                Refurbished Phone
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-              >
-                Contact Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/blog"
-                className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-              >
-                Blog
-              </Link>
-            </li>
+            {navbarLinks}
           </div>
           <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
             <div className="inline-flex items-center rounded-full">
-              <div>
-                <input
-                  type="text"
-                  className="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
-                  placeholder="Search"
-                />
-              </div>
+              <div>{searchBox}</div>
               <div>
                 <div className="inline-flex items-center px-4 py-2">
                   <Link>
                     {" "}
                     <MdOutlineShoppingBag className="text-2xl mx-1" />{" "}
                   </Link>
-                  {user ? (
-                    <>
-                    <div className="avatar">
-                      <div className="w-10 rounded-full">
-                        <img data-tooltip-id="my-tooltip" data-tooltip-content={user?.displayName} src={user?.photoURL} />
-                      </div>
-                    </div>
-                    <Tooltip id="my-tooltip" />
-                    <IoMdLogOut data-tooltip-id="my-tooltip" data-tooltip-content="Log Out!" className="text-2xl cursor-pointer mx-2" onClick={handleLogOut}/>
-                    </>
-                  ) : (
-                    <Link to="/login">
-                      {" "}
-                      <FaUser data-tooltip-id="my-tooltip" data-tooltip-content="Log In !" className="text-xl mx-1" />{" "}
-                    </Link>
-                  )}
+                  {loginUser}
                 </div>
               </div>
             </div>

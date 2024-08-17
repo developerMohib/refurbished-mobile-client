@@ -1,12 +1,14 @@
-.sticky-section {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: all 0.3s ease;
-}
 
-.is-sticky {
-  background-color: #fff; /* or any color you prefer */
-  box-shadow: 0 2px 24px 0 rgba(0, 0, 0, 0.15);
-  /* Add any other styles for the sticky state */
+@media (min-width: 1024px) {
+  .sticky-section {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+
+  .sticky-section.is-sticky {
+    background-color: #fff; /* or any color you prefer */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
 }

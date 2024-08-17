@@ -1,4 +1,14 @@
+import Swal from "sweetalert2";
+
 const Contact = () => {
+  const handleAlert = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+      footer: 'Not done yet. Thank you for click'
+    });
+  }
   return (
     <section>
       <div className="bg-white dark:bg-gray-900">
@@ -9,7 +19,7 @@ const Contact = () => {
             </p>
 
             <h1 className="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl dark:text-white">
-              Get in touch
+              Reach out us
             </h1>
 
             <p className="mt-3 text-gray-500 dark:text-gray-400">
@@ -117,7 +127,7 @@ const Contact = () => {
         <div className="container mx-auto px-5 py-24">
           <div className="mb-12 flex w-full flex-col text-center">
             <h1 className="title-font mb-4 text-2xl font-medium text-white sm:text-3xl">
-              Contact Us
+             Get in Touch
             </h1>
             <p className="mx-auto text-base leading-relaxed lg:w-2/3">
               Feel free to reach out to us! Whether you have a question,
@@ -178,7 +188,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="w-full p-2">
-                <button className="mx-auto flex rounded border-0 bg-indigo-500 py-2 px-8 text-lg text-white hover:bg-indigo-600 focus:outline-none">
+                <button onClick={handleAlert} className="mx-auto flex rounded border-0 bg-indigo-500 py-2 px-8 text-lg text-white hover:bg-indigo-600 focus:outline-none">
                   Button
                 </button>
               </div>

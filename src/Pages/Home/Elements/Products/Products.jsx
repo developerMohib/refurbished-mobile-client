@@ -8,7 +8,7 @@ import useAllProducts from "../../../../Hooks/useAllProducts";
 
 const Products = () => {
   const { loading } = useAuth();
-  const [value, setValue] = useState(500);
+  const [value, setValue] = useState(7000);
   const [isSticky, setIsSticky] = useState(false);
   const { products, isLoading } = useAllProducts();
 
@@ -16,34 +16,43 @@ const Products = () => {
     console.log("value ", e.target.value);
     setValue(e.target.value);
   };
+
+  const handleBrand = (e) => {
+    console.log( ' amare paico ',e.target.value)
+  }
+  const handleSort = (e) => {
+    console.log( ' amare paico ',e.target.value)
+  }
+
+
   if (isLoading || loading) {
     <Loader />;
   }
   useEffect(() => {
     const handleScroll = () => {
-      const bannerHeight = 300 ; 
+      const bannerHeight = 300;
       const scrollPosition = window.scrollY;
       setIsSticky(scrollPosition > bannerHeight);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-
 
   return (
     <div className="px-4">
       {/* test */}
       <div
-        className={`md:grid grid-cols-3 gap-5 my-10 bg-gray-200 w-full z-50 sticky-section ${isSticky ? 'is-sticky' : ''} `}
+        className={`md:grid grid-cols-3 gap-5 my-10 bg-gray-200 w-full z-50 sticky-section ${
+          isSticky ? "is-sticky" : ""
+        } `}
       >
         {/* Price Range Here */}
         <div className="col-span-2">
-          <div className="grid grid-cols-2 gap-5">
+          <div className="md:grid grid-cols-2 my-2 gap-5">
             <div className="grid-cols-1 border border-slate-400 p-4">
               <div className="bg-white rounded-lg shadow-lg px-6 w-full max-w-md">
                 <div className="mb-4">
@@ -71,60 +80,61 @@ const Products = () => {
             </div>
 
             <div className="grid-cols-1 shadow-md border border-slate-400 p-4">
-              <div className="flex gap-3">
+              <div className="md:flex gap-3">
                 {/* Brand Filter */}
-              <div className="w-1/2">
-                <select
-                  name="Brand"
-                  id="brand"
-                  className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-                >
-                  <option value="">Category</option>
-                  <option value="basic">Basic</option>
-                  <option value="feature-phone">Feature Phone</option>
-                  <option value="smartphone">Smartphone</option>
-                </select>
-              </div>
-              {/* Category FIlter */}
-              <div className="w-1/2">
-                <select
-                  name="Brand"
-                  id="brand"
-                  className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-                >
-                  <option value="">Brand</option>
-                  <option value="iphone">Iphone</option>
-                  <option value="redmi">Redmi</option>
-                  <option value="vivo">Vivo</option>
-                  <option value="oppo">Oppo</option>
-                </select>
-              </div>
+                <div className="md:w-1/2">
+                  <select
+                    name="Category"
+                    id="category"
+                    className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                  >
+                    <option value="">Category</option>
+                    <option value="basic">Basic</option>
+                    <option value="feature-phone">Feature Phone</option>
+                    <option value="smartphone">Smartphone</option>
+                  </select>
+                </div>
+                {/* Category FIlter */}
+                <div className="md:w-1/2">
+                  <select onChange={handleBrand}
+                    name="Brand"
+                    id="brand"
+                    className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                  >
+                    <option value="">Brand</option>
+                    <option value="iphone">Iphone</option>
+                    <option value="redmi">Redmi</option>
+                    <option value="vivo">Vivo</option>
+                    <option value="oppo">Oppo</option>
+                  </select>
+                </div>
               </div>
 
               <button className="w-full bg-green-500 mt-5 ">Find Phone</button>
             </div>
           </div>
         </div>
-        
-              {/* Sorting */}
+
+        {/* Sorting */}
         <div className="grid-cols-1 border border-slate-400 p-4">
-        <div className="flex items-center">
-                <select
-                  name="Price"
-                  id="Price"
-                  className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-                >
-                  <option value="">Default</option>
-                  <option value="HL">Latest Phone</option>
-                  <option value="HL">High to low</option>
-                  <option value="LH">Low to high</option>
-                </select>
-              </div>
+          <div className="flex items-center">
+            <select
+            onChange={handleSort}
+              name="Price"
+              id="Price"
+              className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+            >
+              <option value="">Default</option>
+              <option value="latest">Latest Phone</option>
+              <option value="highlow">High to low</option>
+              <option value="lowhigh">Low to high</option>
+            </select>
+          </div>
         </div>
       </div>
       {/* test */}
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="md:grid grid-cols-4 gap-4">
         <div className="grid-cols-1">
           {/* for designing category filtering */}
           <Accordion>
@@ -212,8 +222,8 @@ const Products = () => {
           {/* for designing category filtering */}
         </div>
         <div className="col-span-3">
-          <div className="grid grid-cols-3 gap-4">
-            {products?.slice(0,6).map((product) => (
+          <div className="md:grid grid-cols-3 gap-4">
+            {products?.slice(0, 6).map((product) => (
               <div key={product._id} className="col-span-1">
                 <Link
                   to="/"

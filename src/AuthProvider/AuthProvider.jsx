@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
   // sign in or login
   const loginEmailPass = (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password)
   };
     // google sign in
     const loginWithGoogle = () => {
@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   }
 
-  const userInfo = { createUser, loading, loginEmailPass, user, updateUser, logOut,loginWithGoogle};
+  const userInfo = { createUser, loading,setLoading, loginEmailPass, user, updateUser, logOut,loginWithGoogle};
   return (
     <AuthCustomContext.Provider value={userInfo}>
       {children}
