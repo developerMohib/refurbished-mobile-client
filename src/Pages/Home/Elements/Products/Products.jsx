@@ -4,28 +4,61 @@ import { Link } from "react-router-dom";
 import { Accordion } from "flowbite-react";
 import useAuth from "../../../../Hooks/useAuth";
 import Loader from "../../../../Component/Loader/Loader";
-import useAllProducts from "../../../../Hooks/useAllProducts";
+import { CiSearch } from "react-icons/ci";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 const Products = () => {
   const { loading } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const [value, setValue] = useState(7000);
+  const [pName, setPName] = useState("");
+  const [products, setProducts] = useState([]);
   const [isSticky, setIsSticky] = useState(false);
-  const { products, isLoading } = useAllProducts();
+  // const { isLoading } = useAllProducts();
 
   const handlePrice = (e) => {
     console.log("value ", e.target.value);
     setValue(e.target.value);
   };
 
+  const handleSearch = async () => {
+    const name = pName;
+    try {
+      const response = await axiosPublic.get(`/some-products`, {
+        params: { productName: name }
+      });
+      // console.log('Search results:', response.data);
+      // You can update your state here with the search results if needed
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error during search:', error);
+    }
+  };
+  
+
   const handleBrand = (e) => {
-    console.log( ' amare paico ',e.target.value)
-  }
-  const handleSort = (e) => {
-    console.log( ' amare paico ',e.target.value)
-  }
+    console.log(" amare paico ", e.target.value);
+  };
 
+  // handle sort products
 
-  if (isLoading || loading) {
+  useEffect(() => {
+    const handleSort = async () => {
+      try {
+        const res = await axiosPublic.get("/products", {
+          params: {
+            sort: value,// Sending 'sort' as a query parameter
+          },
+        });
+        setProducts(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    handleSort();
+  }, [axiosPublic, value]);
+
+  if (loading) {
     <Loader />;
   }
   useEffect(() => {
@@ -96,7 +129,8 @@ const Products = () => {
                 </div>
                 {/* Category FIlter */}
                 <div className="md:w-1/2">
-                  <select onChange={handleBrand}
+                  <select
+                    onChange={handleBrand}
                     name="Brand"
                     id="brand"
                     className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
@@ -116,19 +150,29 @@ const Products = () => {
         </div>
 
         {/* Sorting */}
-        <div className="grid-cols-1 border border-slate-400 p-4">
+        <div className="grid-cols-1 border border-slate-400 px-4">
           <div className="flex items-center">
             <select
-            onChange={handleSort}
+              onChange={(e) => setValue(e.target.value)}
               name="Price"
               id="Price"
               className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
             >
-              <option value="">Default</option>
+              <option value=" ">Default</option>
               <option value="latest">Latest Phone</option>
               <option value="highlow">High to low</option>
               <option value="lowhigh">Low to high</option>
             </select>
+          </div>
+
+          <div className="relative">
+            <input
+              onChange={(e) => setPName(e.target.value)}
+              type="text"
+              className="w-full mt-1 py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300 relative"
+              placeholder="Search"
+            />
+            <button className="absolute right-0 px-4 py-1 btn " onClick={handleSearch}> < CiSearch className="text-2xl" /> </button>
           </div>
         </div>
       </div>

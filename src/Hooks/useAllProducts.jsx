@@ -8,7 +8,7 @@ const useAllProducts = () => {
         queryFn: async () =>{
             // here getting data
             try {
-                const res = await axiosPublic('/products');                
+                const res = await axiosPublic.get('/products');                
                 return res.data.data;
               } catch (error) {
                 console.error('Error fetching products:', error);
