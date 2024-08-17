@@ -7,34 +7,62 @@ import Loader from "../../../../Component/Loader/Loader";
 import { CiSearch } from "react-icons/ci";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
+import { Pagination } from "flowbite-react";
+import { useQuery } from "@tanstack/react-query";
+
 const Products = () => {
   const { loading } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const axiosPublic = useAxiosPublic();
-  const [value, setValue] = useState(7000);
+  const [value, setValue] = useState();
+  const [priceValue, setPriceValue] = useState(7000);
   const [pName, setPName] = useState("");
   const [products, setProducts] = useState([]);
   const [isSticky, setIsSticky] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  console.log("currentPage ", currentPage);
+  const { data: productsCount = {} } = useQuery({
+    queryKey: ["productC"],
+    queryFn: async () => {
+      try {
+        const res = await axiosPublic.get("/productCount");
+        const { count } = res.data;
+
+        // Return the object with count if it exists, otherwise an empty object
+        return count !== undefined ? { count } : {};
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        return {}; // Return an empty object in case of an error
+      }
+    },
+  });
+
+  const totalProduct = productsCount?.count || 0; // Ensure it defaults to 0 if undefined
+  const itemPerPage = 3;
+  const numberOfPage = Math.ceil(totalProduct / itemPerPage);
+
   // const { isLoading } = useAllProducts();
 
   const handlePrice = (e) => {
     console.log("value ", e.target.value);
-    setValue(e.target.value);
+    setPriceValue(e.target.value);
   };
 
   const handleSearch = async () => {
     const name = pName;
     try {
       const response = await axiosPublic.get(`/some-products`, {
-        params: { productName: name }
+        params: { productName: name },
       });
       // console.log('Search results:', response.data);
       // You can update your state here with the search results if needed
       setProducts(response.data);
     } catch (error) {
-      console.error('Error during search:', error);
+      console.error("Error during search:", error);
     }
   };
-  
 
   const handleBrand = (e) => {
     console.log(" amare paico ", e.target.value);
@@ -47,7 +75,7 @@ const Products = () => {
       try {
         const res = await axiosPublic.get("/products", {
           params: {
-            sort: value,// Sending 'sort' as a query parameter
+            sort: value, // Sending 'sort' as a query parameter
           },
         });
         setProducts(res.data);
@@ -58,9 +86,6 @@ const Products = () => {
     handleSort();
   }, [axiosPublic, value]);
 
-  if (loading) {
-    <Loader />;
-  }
   useEffect(() => {
     const handleScroll = () => {
       const bannerHeight = 300;
@@ -74,6 +99,34 @@ const Products = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axiosPublic.get(
+          `/productpage?page=${currentPage}&size=${itemPerPage}`
+        );
+        setProducts(response.data); // Assuming response.data is the data you want
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setProducts([]); // Optionally reset data on error
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [axiosPublic, currentPage, itemPerPage]);
+
+  if (loading || isLoading) {
+    return <Loader />;
+  }
+  if (products.length === 0) {
+    return <div>No products found.</div>; // Optional: handle empty data case
+  }
+
+  const onPageChange = (page) => setCurrentPage(page);
 
   return (
     <div className="px-4">
@@ -102,12 +155,12 @@ const Products = () => {
                     className="w-full accent-indigo-600"
                     min="7000"
                     max="100000"
-                    value={value}
+                    value={priceValue}
                   />
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span id="minPrice">7000</span>
-                  <span id="maxPrice">{value}</span>
+                  <span id="maxPrice">{priceValue}</span>
                 </div>
               </div>
             </div>
@@ -159,7 +212,7 @@ const Products = () => {
               className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
             >
               <option value=" ">Default</option>
-              <option value="latest">Latest Phone</option>
+              <option value="newest">Latest Phone</option>
               <option value="highlow">High to low</option>
               <option value="lowhigh">Low to high</option>
             </select>
@@ -172,7 +225,13 @@ const Products = () => {
               className="w-full mt-1 py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300 relative"
               placeholder="Search"
             />
-            <button className="absolute right-0 px-4 py-1 btn " onClick={handleSearch}> < CiSearch className="text-2xl" /> </button>
+            <button
+              className="absolute right-0 px-4 py-1 btn "
+              onClick={handleSearch}
+            >
+              {" "}
+              <CiSearch className="text-2xl" />{" "}
+            </button>
           </div>
         </div>
       </div>
@@ -267,7 +326,7 @@ const Products = () => {
         </div>
         <div className="col-span-3">
           <div className="md:grid grid-cols-3 gap-4">
-            {products?.slice(0, 6).map((product) => (
+            {products?.map((product) => (
               <div key={product._id} className="col-span-1">
                 <Link
                   to="/"
@@ -294,6 +353,9 @@ const Products = () => {
                     <p className="mt-2 text-pretty text-gray-700">
                       Price : {product.price} BDT
                     </p>
+                    <small className="mt-2 text-pretty text-sm text-gray-700">
+                      Release Date : {product.productCreationDateTime}
+                    </small>
 
                     <span className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
                       More
@@ -304,6 +366,15 @@ const Products = () => {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* pagination */}
+      <div className="flex overflow-x-auto sm:justify-center">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={numberOfPage}
+          onPageChange={onPageChange}
+        />
       </div>
     </div>
   );
