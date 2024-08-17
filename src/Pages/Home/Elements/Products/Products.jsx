@@ -1,5 +1,5 @@
 import "./products.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Accordion } from "flowbite-react";
 import useAuth from "../../../../Hooks/useAuth";
@@ -48,42 +48,50 @@ const Products = () => {
     setPriceValue(e.target.value);
   };
 
-  const handleSearch = async () => {
-    const name = pName;
-    try {
-      const response = await axiosPublic.get(`/some-products`, {
-        params: { productName: name },
-      });
-      // console.log('Search results:', response.data);
-      // You can update your state here with the search results if needed
-      setProducts(response.data);
-    } catch (error) {
-      console.error("Error during search:", error);
+  const fetchProducts = useCallback(
+    async (params = {}) => {
+      try {
+        const response = await axiosPublic.get("/products", { params });
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error during API request:", error);
+      }
+    },
+    [axiosPublic]
+  );
+
+  const handleSearch = useCallback(() => {
+    const params = {
+      productName: pName,
+      page: currentPage,
+      size: itemPerPage,
+    };
+    fetchProducts(params);
+  }, [pName, currentPage, itemPerPage, fetchProducts]);
+
+  const handleSort = useCallback(() => {
+    const params = {
+      sort: value,
+      productName: pName,
+      page: currentPage,
+      size: itemPerPage,
+    };
+    fetchProducts(params);
+  }, [value, pName, currentPage, itemPerPage, fetchProducts]);
+
+  useEffect(() => {
+    if (pName) {
+      handleSearch(); // Only if there's a search term
+    } else {
+      handleSort(); // Otherwise, handle sorting
     }
-  };
+  }, [value, pName, currentPage, handleSearch, handleSort]);
 
   const handleBrand = (e) => {
     console.log(" amare paico ", e.target.value);
   };
 
-  // handle sort products
-
-  useEffect(() => {
-    const handleSort = async () => {
-      try {
-        const res = await axiosPublic.get("/products", {
-          params: {
-            sort: value, // Sending 'sort' as a query parameter
-          },
-        });
-        setProducts(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    handleSort();
-  }, [axiosPublic, value]);
-
+  // To make menu of this web appliction.
   useEffect(() => {
     const handleScroll = () => {
       const bannerHeight = 300;
@@ -120,10 +128,7 @@ const Products = () => {
   if (loading || isLoading) {
     return <Loader />;
   }
-  if (products.length === 0) {
-    return <div>No products found.</div>; // Optional: handle empty data case
-  }
-
+  
   const onPageChange = (page) => setCurrentPage(page);
 
   return (
@@ -137,9 +142,9 @@ const Products = () => {
         {/* Price Range Here */}
         <div className="col-span-2">
           <div className="md:grid grid-cols-2 my-2 gap-5">
-            <div className="grid-cols-1 border border-slate-400 p-4">
-              <div className="bg-white rounded-lg shadow-lg px-6 w-full max-w-md">
-                <div className="mb-4">
+            <div className="grid-cols-1 border border-slate-400 pt-2">
+              <div className="bg-white rounded-lg px-6 w-full max-w-md">
+                <div className="">
                   <label
                     htmlFor="price-range"
                     className="block text-gray-700 font-bold mb-2"
@@ -150,7 +155,7 @@ const Products = () => {
                     onChange={handlePrice}
                     type="range"
                     id="price-range"
-                    className="w-full accent-indigo-600"
+                    className="w-full accent-indigo-600 pt-2"
                     min="7000"
                     max="100000"
                     value={priceValue}
@@ -195,7 +200,9 @@ const Products = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-green-500 mt-5 ">Find Phone</button>
+              <button className="w-full bg-green-500 text-white mt-5 ">
+                Find Phone
+              </button>
             </div>
           </div>
         </div>
@@ -324,44 +331,52 @@ const Products = () => {
         </div>
         <div className="col-span-3">
           <div className="md:grid grid-cols-3 gap-4">
-            {products?.map((product) => (
-              <div key={product._id} className="col-span-1">
-                <Link
-                  to="/"
-                  className="relative block rounded-tr-3xl border border-gray-100"
-                >
-                  <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-3 py-2 font-medium uppercase tracking-widest text-white">
-                    Save 10%
-                  </span>
-
-                  <img
-                    src={product.productImage}
-                    alt=""
-                    className="h-80 w-full rounded-bl-3xl rounded-tr-3xl border border-gray-300 object-cover"
-                  />
-
-                  <div className="p-4 text-center">
-                    <strong className="text-xl font-medium text-gray-900">
-                      {product.productName}
-                    </strong>
-
-                    <p className="mt-2 text-pretty text-gray-700">
-                      {product.description.slice(0, 70)}
-                    </p>
-                    <p className="mt-2 text-pretty text-gray-700">
-                      Price : {product.price} BDT
-                    </p>
-                    <small className="mt-2 text-pretty text-sm text-gray-700">
-                      Release Date : {product.productCreationDateTime}
-                    </small>
-
-                    <span className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
-                      More
+            {products.length > 0 ? (
+              products.map((product) => (
+                <div key={product._id} className="col-span-1">
+                  <Link
+                    to="/"
+                    className="relative block rounded-tr-3xl border border-gray-100"
+                  >
+                    <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-3 py-2 font-medium uppercase tracking-widest text-white">
+                      Save 10%
                     </span>
-                  </div>
-                </Link>
+
+                    <img
+                      src={product.productImage}
+                      alt=""
+                      className="h-80 w-full rounded-bl-3xl rounded-tr-3xl border border-gray-300 object-cover"
+                    />
+
+                    <div className="p-4 text-center">
+                      <strong className="text-xl font-medium text-gray-900">
+                        {product.productName}
+                      </strong>
+
+                      <p className="mt-2 text-pretty text-gray-700">
+                        {product.description.slice(0, 70)}
+                      </p>
+                      <p className="mt-2 text-pretty text-gray-700">
+                        Price : {product.price} BDT
+                      </p>
+                      <small className="mt-2 text-pretty text-sm text-gray-700">
+                        Release Date : {product.productCreationDateTime}
+                      </small>
+
+                      <span className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
+                        More
+                      </span>
+                    </div>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-3 text-center p-10">
+                <p className="text-lg font-semibold text-gray-700">
+                  No products available
+                </p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>

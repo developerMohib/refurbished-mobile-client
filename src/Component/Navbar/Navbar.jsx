@@ -23,6 +23,14 @@ const Navbar = () => {
     <>
       <li>
         <Link
+          to="/"
+          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+        >
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link
           to="/new-phone"
           className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
         >
