@@ -43,8 +43,6 @@ const Products = () => {
   const itemPerPage = 3;
   const numberOfPage = Math.ceil(totalProduct / itemPerPage);
 
-  // const { isLoading } = useAllProducts();
-
   const handlePrice = (e) => {
     console.log("value ", e.target.value);
     setPriceValue(e.target.value);
