@@ -1,10 +1,10 @@
 import "./products.css";
-import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
 import { Accordion } from "flowbite-react";
 import useAuth from "../../../../Hooks/useAuth";
 import Loader from "../../../../Component/Loader/Loader";
-import { CiSearch } from "react-icons/ci";
+import { useCallback, useEffect, useState } from "react";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 import { Pagination } from "flowbite-react";
@@ -12,13 +12,13 @@ import { useQuery } from "@tanstack/react-query";
 
 const Products = () => {
   const { loading } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
   const axiosPublic = useAxiosPublic();
-  const [value, setValue] = useState();
-  const [priceValue, setPriceValue] = useState(7000);
+  const [value, setValue] = useState() ;
   const [pName, setPName] = useState("");
   const [products, setProducts] = useState([]);
   const [isSticky, setIsSticky] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [priceValue, setPriceValue] = useState(7000);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -128,7 +128,7 @@ const Products = () => {
   if (loading || isLoading) {
     return <Loader />;
   }
-  
+
   const onPageChange = (page) => setCurrentPage(page);
 
   return (
