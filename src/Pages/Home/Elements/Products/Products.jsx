@@ -13,22 +13,27 @@ import { useQuery } from "@tanstack/react-query";
 const Products = () => {
   const { loading } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const [value, setValue] = useState() ;
+  const [value, setValue] = useState();
   const [pName, setPName] = useState("");
+
   const [products, setProducts] = useState([]);
   const [isSticky, setIsSticky] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [priceValue, setPriceValue] = useState(7000);
+  const [priceRange, setPriceRange] = useState(10);
 
   const [currentPage, setCurrentPage] = useState(1);
+  
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
 
-  console.log("currentPage ", currentPage);
   const { data: productsCount = {} } = useQuery({
     queryKey: ["productC"],
     queryFn: async () => {
       try {
         const res = await axiosPublic.get("/productCount");
+
         const { count } = res.data;
+        console.log('res pagi', count)
 
         // Return the object with count if it exists, otherwise an empty object
         return count !== undefined ? { count } : {};
@@ -43,15 +48,11 @@ const Products = () => {
   const itemPerPage = 3;
   const numberOfPage = Math.ceil(totalProduct / itemPerPage);
 
-  const handlePrice = (e) => {
-    console.log("value ", e.target.value);
-    setPriceValue(e.target.value);
-  };
-
   const fetchProducts = useCallback(
     async (params = {}) => {
       try {
         const response = await axiosPublic.get("/products", { params });
+        console.log('response data',response.data)
         setProducts(response.data);
       } catch (error) {
         console.error("Error during API request:", error);
@@ -59,7 +60,19 @@ const Products = () => {
     },
     [axiosPublic]
   );
-
+  
+  // Find Phone with category, brand, price range
+  const handleFindPhone = () => {
+    const params = {
+      // list
+      price: priceRange,
+      brand: brand,
+      category: category,
+    };
+    // console.log('params ', params )
+    fetchProducts(params);
+  };
+  // Search Product according to name
   const handleSearch = useCallback(() => {
     const params = {
       productName: pName,
@@ -86,10 +99,6 @@ const Products = () => {
       handleSort(); // Otherwise, handle sorting
     }
   }, [value, pName, currentPage, handleSearch, handleSort]);
-
-  const handleBrand = (e) => {
-    console.log(" amare paico ", e.target.value);
-  };
 
   // To make menu of this web appliction.
   useEffect(() => {
@@ -152,18 +161,18 @@ const Products = () => {
                     Price Range
                   </label>
                   <input
-                    onChange={handlePrice}
+                    onChange={(e) => setPriceRange(e.target.value)}
                     type="range"
                     id="price-range"
                     className="w-full accent-indigo-600 pt-2"
-                    min="7000"
-                    max="100000"
-                    value={priceValue}
+                    min="10"
+                    max="1000"
+                    value={priceRange}
                   />
                 </div>
                 <div className="flex justify-between text-gray-500">
-                  <span id="minPrice">7000</span>
-                  <span id="maxPrice">{priceValue}</span>
+                  <span id="minPrice">10</span>
+                  <span id="maxPrice">{priceRange}</span>
                 </div>
               </div>
             </div>
@@ -173,34 +182,40 @@ const Products = () => {
                 {/* Brand Filter */}
                 <div className="md:w-1/2">
                   <select
+                    onChange={(e) => setCategory(e.target.value)}
                     name="Category"
                     id="category"
                     className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                   >
                     <option value="">Category</option>
                     <option value="basic">Basic</option>
-                    <option value="feature-phone">Feature Phone</option>
+                    <option value="features phone">Feature Phone</option>
                     <option value="smartphone">Smartphone</option>
                   </select>
                 </div>
                 {/* Category FIlter */}
                 <div className="md:w-1/2">
                   <select
-                    onChange={handleBrand}
+                    onChange={(e) => setBrand(e.target.value)}
                     name="Brand"
                     id="brand"
                     className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                   >
-                    <option value="">Brand</option>
-                    <option value="iphone">Iphone</option>
-                    <option value="redmi">Redmi</option>
-                    <option value="vivo">Vivo</option>
-                    <option value="oppo">Oppo</option>
+                    <option value="">Brand Name </option>
+                    <option value="Iphone">Iphone</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Motorola">Motorola</option>
+                    <option value="Redmi">Redmi</option>
+                    <option value="Vivo">Vivo</option>
+                    <option value="Oppo">Oppo</option>
                   </select>
                 </div>
               </div>
 
-              <button className="w-full bg-green-500 text-white mt-5 ">
+              <button
+                onClick={handleFindPhone}
+                className="w-full bg-green-500 text-white mt-5 "
+              >
                 Find Phone
               </button>
             </div>
@@ -331,8 +346,8 @@ const Products = () => {
         </div>
         <div className="col-span-3">
           <div className="md:grid grid-cols-3 gap-4">
-            {products.length > 0 ? (
-              products.map((product) => (
+            {products?.length > 0 ? (
+              products?.map((product) => (
                 <div key={product._id} className="col-span-1">
                   <Link
                     to="/"

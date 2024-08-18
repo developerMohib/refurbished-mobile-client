@@ -1,0 +1,178 @@
+[
+    {
+      "productName": "Basic Flip Phone",
+      "productImage": "https://i.ibb.co/7nyqtZC/1741229-1-Copy.webp",
+      "description": "A simple and durable flip phone with basic call and text functionality.",
+      "price": 29.99,
+      "category": "basic",
+      "ratings": 4.1,
+      "productCreationDateTime": "2024-07-15T10:00:00",
+      "brand": "Nokia",
+      "phoneRole": "new"
+    },
+    {
+      "productName": "Smartphone X",
+      "productImage": "https://i.ibb.co/7nyqtZC/smartphone-x.jpg",
+      "description": "A high-performance smartphone with cutting-edge features.",
+      "price": 899.99,
+      "category": "smartphone",
+      "ratings": 4.8,
+      "productCreationDateTime": "2024-07-18T12:00:00",
+      "brand": "Samsung",
+      "phoneRole": "new"
+    },
+    {
+      "productName": "Feature Phone Classic",
+      "productImage": "https://i.ibb.co/7nyqtZC/feature-phone-classic.jpg",
+      "description": "A reliable feature phone with long battery life.",
+      "price": 49.99,
+      "category": "features phone",
+      "ratings": 4.2,
+      "productCreationDateTime": "2024-07-20T09:30:00",
+      "brand": "Motorola",
+      "phoneRole": "refurbished"
+    },
+    {
+      "productName": "Premium Flip Phone",
+      "productImage": "https://i.ibb.co/7nyqtZC/premium-flip-phone.jpg",
+      "description": "A stylish flip phone with modern features and sleek design.",
+      "price": 199.99,
+      "category": "basic",
+      "ratings": 4.5,
+      "productCreationDateTime": "2024-07-22T14:00:00",
+      "brand": "Vivo",
+      "phoneRole": "new"
+    },
+    {
+      "productName": "Smartphone Y",
+      "productImage": "https://i.ibb.co/7nyqtZC/smartphone-y.jpg",
+      "description": "A versatile smartphone with a large display and powerful processor.",
+      "price": 749.99,
+      "category": "smartphone",
+      "ratings": 4.7,
+      "productCreationDateTime": "2024-07-25T16:45:00",
+      "brand": "Iphone",
+      "phoneRole": "new"
+    },
+    {
+      "productName": "Classic Feature Phone",
+      "productImage": "https://i.ibb.co/7nyqtZC/classic-feature-phone.jpg",
+      "description": "An easy-to-use feature phone perfect for basic communication.",
+      "price": 39.99,
+      "category": "features phone",
+      "ratings": 4.0,
+      "productCreationDateTime": "2024-07-28T08:15:00",
+      "brand": "Redmi",
+      "phoneRole": "old"
+    },
+    {
+      "productName": "Advanced Smartphone Z",
+      "productImage": "https://i.ibb.co/7nyqtZC/advanced-smartphone-z.jpg",
+      "description": "A top-tier smartphone with exceptional camera and battery life.",
+      "price": 999.99,
+      "category": "smartphone",
+      "ratings": 4.9,
+      "productCreationDateTime": "2024-07-30T11:00:00",
+      "brand": "Oppo",
+      "phoneRole": "new"
+    },
+    {
+      "productName": "Economy Flip Phone",
+      "productImage": "https://i.ibb.co/7nyqtZC/economy-flip-phone.jpg",
+      "description": "A budget-friendly flip phone with essential features.",
+      "price": 19.99,
+      "category": "basic",
+      "ratings": 3.8,
+      "productCreationDateTime": "2024-08-01T13:20:00",
+      "brand": "Iphone",
+      "phoneRole": "refurbished"
+    },{
+        "productName": "Basic Flip Phone",
+        "productImage": "https://i.ibb.co/7nyqtZC/1741229-1-Copy.webp",
+        "description": "A simple and durable flip phone with basic call and text functionality.",
+        "price": 29.99,
+        "category": "basic",
+        "ratings": 4.1,
+        "productCreationDateTime": "2024-07-15T10:00:00",
+        "brand": "Iphone",
+        "phoneRole": "new"
+      },
+      {
+        "productName": "Smartphone X",
+        "productImage": "https://i.ibb.co/7nyqtZC/smartphone-x.jpg",
+        "description": "A high-performance smartphone with cutting-edge features.",
+        "price": 899.99,
+        "category": "smartphone",
+        "ratings": 4.8,
+        "productCreationDateTime": "2024-07-18T12:00:00",
+        "brand": "Samsung",
+        "phoneRole": "new"
+      },
+      {
+        "productName": "Feature Phone Classic",
+        "productImage": "https://i.ibb.co/7nyqtZC/feature-phone-classic.jpg",
+        "description": "A reliable feature phone with long battery life.",
+        "price": 49.99,
+        "category": "features phone",
+        "ratings": 4.2,
+        "productCreationDateTime": "2024-07-20T09:30:00",
+        "brand": "Motorola",
+        "phoneRole": "refurbished"
+      },
+      {
+        "productName": "Premium Flip Phone",
+        "productImage": "https://i.ibb.co/7nyqtZC/premium-flip-phone.jpg",
+        "description": "A stylish flip phone with modern features and sleek design.",
+        "price": 199.99,
+        "category": "basic",
+        "ratings": 4.5,
+        "productCreationDateTime": "2024-07-22T14:00:00",
+        "brand": "Vivo",
+        "phoneRole": "new"
+      },
+      {
+        "productName": "Smartphone Y",
+        "productImage": "https://i.ibb.co/7nyqtZC/smartphone-y.jpg",
+        "description": "A versatile smartphone with a large display and powerful processor.",
+        "price": 749.99,
+        "category": "smartphone",
+        "ratings": 4.7,
+        "productCreationDateTime": "2024-07-25T16:45:00",
+        "brand": "Iphone",
+        "phoneRole": "new"
+      },
+      {
+        "productName": "Classic Feature Phone",
+        "productImage": "https://i.ibb.co/7nyqtZC/classic-feature-phone.jpg",
+        "description": "An easy-to-use feature phone perfect for basic communication.",
+        "price": 39.99,
+        "category": "features phone",
+        "ratings": 4.0,
+        "productCreationDateTime": "2024-07-28T08:15:00",
+        "brand": "Redmi",
+        "phoneRole": "old"
+      },
+      {
+        "productName": "Advanced Smartphone Z",
+        "productImage": "https://i.ibb.co/7nyqtZC/advanced-smartphone-z.jpg",
+        "description": "A top-tier smartphone with exceptional camera and battery life.",
+        "price": 999.99,
+        "category": "smartphone",
+        "ratings": 4.9,
+        "productCreationDateTime": "2024-07-30T11:00:00",
+        "brand": "Oppo",
+        "phoneRole": "new"
+      },
+      {
+        "productName": "Economy Flip Phone",
+        "productImage": "https://i.ibb.co/7nyqtZC/economy-flip-phone.jpg",
+        "description": "A budget-friendly flip phone with essential features.",
+        "price": 19.99,
+        "category": "basic",
+        "ratings": 3.8,
+        "productCreationDateTime": "2024-08-01T13:20:00",
+        "brand": "Iphone",
+        "phoneRole": "refurbished"
+      }
+  ]
+  
