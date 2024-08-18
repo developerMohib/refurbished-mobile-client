@@ -74,7 +74,4 @@ This project is a full-stack web application built with the MERN stack (MongoDB,
 1. **Clone Repository**
 
    ```bash
-   git clone <https://github.com/developerMohib/refurbished-mobile-client.git
-
-
-   
+   git clone https://github.com/developerMohib/refurbished-mobile-client.git
