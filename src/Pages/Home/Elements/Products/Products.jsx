@@ -9,6 +9,7 @@ import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 import { Pagination } from "flowbite-react";
 import { useQuery } from "@tanstack/react-query";
+import ProdCom from "./ProdCom";
 
 const Products = () => {
   const { loading } = useAuth();
@@ -45,7 +46,7 @@ const Products = () => {
   });
 
   const totalProduct = productsCount?.count || 0; // Ensure it defaults to 0 if undefined
-  const itemPerPage = 3;
+  const itemPerPage = 6;
   const numberOfPage = Math.ceil(totalProduct / itemPerPage);
 
   const fetchProducts = useCallback(
@@ -142,6 +143,7 @@ const Products = () => {
 
   return (
     <div className="px-4">
+      
       {/* test */}
       <div
         className={`md:grid grid-cols-3 gap-5 my-10 bg-gray-200 w-full z-50 sticky-section ${
@@ -166,7 +168,7 @@ const Products = () => {
                     id="price-range"
                     className="w-full accent-indigo-600 pt-2"
                     min="10"
-                    max="1000"
+                    max="250000"
                     value={priceRange}
                   />
                 </div>
@@ -208,6 +210,7 @@ const Products = () => {
                     <option value="Redmi">Redmi</option>
                     <option value="Vivo">Vivo</option>
                     <option value="Oppo">Oppo</option>
+                    <option value="Huawei">Huawei</option>
                   </select>
                 </div>
               </div>
@@ -348,42 +351,7 @@ const Products = () => {
           <div className="md:grid grid-cols-3 gap-4">
             {products?.length > 0 ? (
               products?.map((product) => (
-                <div key={product._id} className="col-span-1">
-                  <Link
-                    to="/"
-                    className="relative block rounded-tr-3xl border border-gray-100"
-                  >
-                    <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-3 py-2 font-medium uppercase tracking-widest text-white">
-                      Save 10%
-                    </span>
-
-                    <img
-                      src={product.productImage}
-                      alt=""
-                      className="h-80 w-full rounded-bl-3xl rounded-tr-3xl border border-gray-300 object-cover"
-                    />
-
-                    <div className="p-4 text-center">
-                      <strong className="text-xl font-medium text-gray-900">
-                        {product.productName}
-                      </strong>
-
-                      <p className="mt-2 text-pretty text-gray-700">
-                        {product.description.slice(0, 70)}
-                      </p>
-                      <p className="mt-2 text-pretty text-gray-700">
-                        Price : {product.price} BDT
-                      </p>
-                      <small className="mt-2 text-pretty text-sm text-gray-700">
-                        Release Date : {product.productCreationDateTime}
-                      </small>
-
-                      <span className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
-                        More
-                      </span>
-                    </div>
-                  </Link>
-                </div>
+                <ProdCom key={product._id} product={product} />
               ))
             ) : (
               <div className="col-span-3 text-center p-10">

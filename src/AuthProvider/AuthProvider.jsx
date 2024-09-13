@@ -51,7 +51,6 @@ const AuthProvider = ({ children }) => {
         setLoading(false);
       }
       else{
-        console.log('user sign out')
         setLoading(false);
       }
     });
