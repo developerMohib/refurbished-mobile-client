@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Carousel } from "flowbite-react";
 import { CiCircleCheck } from "react-icons/ci";
-import slider1 from "../../../assets/slider1.png";
-import slider2 from "../../../assets/slider2.png";
-import slider3 from "../../../assets/slider3.png";
-import slider4 from "../../../assets/slider4.png";
-import slider5 from "../../../assets/slider5.png";
+import slider1 from "../../assets/slider1.png";
+import slider2 from "../../assets/slider2.png";
+import slider3 from "../../assets/slider3.png";
+import slider4 from "../../assets/slider4.png";
+import slider5 from "../../assets/slider5.png";
 const Banner = () => {
   return (
     <div className="relative flex flex-col items-center max-w-screen-xl px-4 mx-auto md:flex-row sm:px-6 p-8">

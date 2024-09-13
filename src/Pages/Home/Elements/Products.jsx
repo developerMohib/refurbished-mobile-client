@@ -2,10 +2,10 @@ import "./products.css";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { Accordion } from "flowbite-react";
-import useAuth from "../../../../Hooks/useAuth";
-import Loader from "../../../../Component/Loader/Loader";
+import useAuth from "../../../Hooks/useAuth";
+import Loader from "../../../Component/Loader/Loader";
 import { useCallback, useEffect, useState } from "react";
-import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 import { Pagination } from "flowbite-react";
 import { useQuery } from "@tanstack/react-query";

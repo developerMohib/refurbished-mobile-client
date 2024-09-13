@@ -1,16 +1,15 @@
-import Banner from "./Elements/Banner";
-import Service from "./Elements/Service";
-import Products from "./Elements/Products/Products";
-
+import Banner from "../../Component/Banner/Banner";
+import Service from "../../Component/Service/Service";
+import Products from "../Home/Elements/Products";
 
 const Home = () => {
-    return (
-        <div>
-            <Banner/>
-            <Products/>
-            <Service/>
-        </div>
-    );
+  return (
+    <div>
+      <Banner />
+      {/* <Products /> */}
+      <Service />
+    </div>
+  );
 };
 
 export default Home;
