@@ -9,8 +9,8 @@ const useAllProducts = () => {
           
             // here getting data
             try {
-                const res = await axiosPublic.get('/products');                
-                return res.data.data;
+                const res = await axiosPublic.get('/products');           
+                return res.data;
               } catch (error) {
                 console.error('Error fetching products:', error);
               }
