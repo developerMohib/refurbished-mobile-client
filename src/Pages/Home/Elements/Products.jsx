@@ -11,9 +11,10 @@ const Products = () => {
   const itemsPerPage = 8; // Fixed the typo from "itemPerPage" to "itemsPerPage"
   const { loading } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
+  const [sorting, setSoriting] = useState('')
 
   // Fetch products for the current page
-  const { products, isLoading } = useAllProducts(currentPage);
+  const { products, isLoading } = useAllProducts(currentPage,itemsPerPage, sorting);
 
   // Handle page change for pagination
   const onPageChange = (page) => setCurrentPage(page);
@@ -27,7 +28,7 @@ const Products = () => {
     <div className="px-4">
       {/* Selection Component */}
       <div className="my-10 bg-gray-200 w-full sticky-section">
-        <Selection />
+        <Selection sorting={sorting} setSoriting={setSoriting} />
       </div>
 
       {/* Products Grid */}

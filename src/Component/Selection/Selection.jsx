@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Selection = () => {
+const Selection = ({sorting, setSoriting}) => {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [isSticky, setIsSticky] = useState(false);
@@ -101,15 +101,18 @@ const Selection = () => {
         {/* sorting */}
         <div className="">
           <select
-            onChange={(e) => setCategory(e.target.value)}
-            name="Category"
-            id="category"
+            onChange={(e) => setSoriting(e.target.value)}
+            name="sorting"
+            id="sorting"
             className="h-full w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
           >
             <option value="">Sorting</option>
-            <option value="hightolow">Highest to lowest</option>
-            <option value="lowtohigh">Lowest to highesh </option>
+            <option value="newest">Newest</option>
+            <option value="highlow">Highest to lowest</option>
+            <option value="lowhigh">Lowest to highesh </option>
           </select>
+          {/* Display the selected sorting */}
+      
         </div>
 
         {/* searching */}
