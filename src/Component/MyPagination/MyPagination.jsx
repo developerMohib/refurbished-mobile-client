@@ -22,7 +22,7 @@ const MyPagination = ({ onPageChange, currentPage, setCurrentPage }) => {
   });
   const totalProduct = data?.count?.count || 0;
   // page per item
-  const numberOfPage = Math?.ceil(totalProduct / 6);
+  const numberOfPage = Math?.ceil(totalProduct / 8);
 
   return (
     <div className="flex overflow-x-auto sm:justify-center">

@@ -1,6 +1,7 @@
 import Banner from "../../Component/Banner/Banner";
-import Service from "../../Component/Service/Service";
 import Products from "../Home/Elements/Products";
+import Service from "../../Component/Service/Service";
+import MyAccordion from "../../Component/MyAccordion/MyAccordion";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Banner />
       <Products />
       <Service />
+      <MyAccordion />
     </div>
   );
 };

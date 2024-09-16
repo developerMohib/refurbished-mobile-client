@@ -8,6 +8,7 @@ import Refurbished from "../Pages/Refurbished/Refurbished";
 import Blog from "../Pages/Blog/Blog";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Details from "../Component/Details/Details";
 
 export const router = createBrowserRouter([
   {
@@ -25,23 +26,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/new-phone",
-        element: <NewPhone/>,
+        element: <NewPhone />,
       },
       {
         path: "/refurbished",
-        element: <Refurbished/>,
+        element: <Refurbished />,
       },
       {
         path: "/blog",
-        element: <Blog/>,
+        element: <Blog />,
       },
       {
         path: "/login",
-        element: <Login/>,
+        element: <Login />,
       },
       {
         path: "/register",
-        element: <Register/>,
+        element: <Register />,
+      },
+      {
+        path: "/details/:id",
+        element: <Details />,
       },
     ],
   },
