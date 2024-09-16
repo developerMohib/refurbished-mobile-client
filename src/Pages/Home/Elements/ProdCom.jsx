@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 const ProdCom = ({ product }) => {
   const {
     productImage,
@@ -7,14 +7,11 @@ const ProdCom = ({ product }) => {
     description,
     price,
     productCreationDateTime,
-    _id
+    _id,
   } = product;
   return (
     <div className="col-span-1">
-      <Link
-        to="/"
-        className="relative block border border-gray-100"
-      >
+      <Link to={`/details/${_id}`} className="relative block border border-gray-100">
         <span className="absolute -right-px -top-px bg-rose-600 px-3 py-2 font-medium uppercase tracking-widest text-white">
           Save 10%
         </span>
@@ -38,17 +35,17 @@ const ProdCom = ({ product }) => {
             Release Date : {productCreationDateTime}
           </small>
 
-          <Link to={`/details/${_id}`} >
-          <span className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase text-center tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
+          <span
+            className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase text-center tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900"
+          >
             Details
           </span>
-          </Link>
         </div>
       </Link>
     </div>
   );
 };
-ProdCom.propTypes = { 
-    product : PropTypes.object ,
-}
+ProdCom.propTypes = {
+  product: PropTypes.object,
+};
 export default ProdCom;

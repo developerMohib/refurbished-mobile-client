@@ -29,8 +29,9 @@ const Selection = () => {
     };
   }, []);
   return (
-    <div className="grid-cols-1 shadow-md border border-slate-400 p-4">
+    <div className="p-4">
       <div className="md:flex gap-3">
+
         {/* Brand Filter */}
         <div className="md:w-1/2">
           <select
@@ -45,6 +46,7 @@ const Selection = () => {
             <option value="smartphone">Smartphone</option>
           </select>
         </div>
+
         {/* Category FIlter */}
         <div className="md:w-1/2">
           <select
@@ -63,14 +65,8 @@ const Selection = () => {
             <option value="Huawei">Huawei</option>
           </select>
         </div>
+        
       </div>
-
-      <button
-        onClick={handleFindPhone}
-        className="w-full bg-green-500 text-white mt-5 "
-      >
-        Find Phone
-      </button>
     </div>
   );
 };
