@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Pagination } from "flowbite-react";
+import PropTypes from "prop-types";
+
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import PropTypes from "prop-types"
- 
+
 const MyPagination = ({ onPageChange, currentPage, setCurrentPage }) => {
-  //   const [currentPage, setCurrentPage] = useState(1);
   onPageChange = (page) => setCurrentPage(page);
   const axiosPublic = useAxiosPublic();
 
@@ -36,9 +36,9 @@ const MyPagination = ({ onPageChange, currentPage, setCurrentPage }) => {
 };
 
 MyPagination.propTypes = {
-    onPageChange : PropTypes.func,
-    currentPage : PropTypes.number,
-    setCurrentPage : PropTypes.number
-}
+  onPageChange: PropTypes.func,
+  currentPage: PropTypes.number,
+  setCurrentPage: PropTypes.number,
+};
 
 export default MyPagination;
