@@ -15,7 +15,6 @@ const MyPagination = ({ onPageChange, currentPage, setCurrentPage, itemsPerPage 
       try {
         const res = await axiosPublic.get("/productCount");
         const count = res?.data || 0 ;
-        console.log('count ', count )
         return count !== undefined ? { count } : {};
       } catch (error) {
         console.log(error);

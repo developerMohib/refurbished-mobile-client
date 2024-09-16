@@ -26,7 +26,7 @@ const Products = () => {
   return (
     <div className="px-4">
       {/* Selection Component */}
-      <div className="md:grid grid-cols-3 gap-5 my-10 bg-gray-200 w-full sticky-section">
+      <div className="my-10 bg-gray-200 w-full sticky-section">
         <Selection />
       </div>
 

@@ -93,9 +93,9 @@ const Banner = () => {
         </div>
       </div>
       <div className="flex items-center md:w-1/2 md:pb-10 md:pl-10">
-        <div className="relative w-full p-3 rounded  md:p-8">
+        <div className="relative w-full p-3 rounded md:p-8">
           <div className="rounded-lg  text-black w-full">
-            <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+            <div className="md:h-56 sm:h-64 xl:h-80 2xl:h-96">
               <Carousel slideInterval={1500}>
                 <img src={slider1} alt="Slide 1" />
                 <img src={slider2} alt="Slide 2" />
