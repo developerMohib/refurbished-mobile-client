@@ -1,18 +1,44 @@
+import { useQuery } from "@tanstack/react-query";
 import { Pagination } from "flowbite-react";
-import { useState } from "react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import PropTypes from "prop-types"
+ 
+const MyPagination = ({ onPageChange, currentPage, setCurrentPage }) => {
+  //   const [currentPage, setCurrentPage] = useState(1);
+  onPageChange = (page) => setCurrentPage(page);
+  const axiosPublic = useAxiosPublic();
 
-const MyPagination = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const onPageChange = (page) => setCurrentPage(page);
-    return (
-        <div className="flex overflow-x-auto sm:justify-center">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={""}
-          onPageChange={onPageChange}
-        />
-      </div>
-    );
+  const { data } = useQuery({
+    queryKey: ["count"],
+    queryFn: async () => {
+      try {
+        const res = await axiosPublic.get("/productCount");
+        const count = res?.data;
+        return count !== undefined ? { count } : {};
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+  const totalProduct = data?.count?.count || 0;
+  // page per item
+  const numberOfPage = Math?.ceil(totalProduct / 6);
+
+  return (
+    <div className="flex overflow-x-auto sm:justify-center">
+      <Pagination
+        currentPage={currentPage}
+        totalPages={numberOfPage}
+        onPageChange={onPageChange}
+      />
+    </div>
+  );
 };
+
+MyPagination.propTypes = {
+    onPageChange : PropTypes.func,
+    currentPage : PropTypes.number,
+    setCurrentPage : PropTypes.number
+}
 
 export default MyPagination;

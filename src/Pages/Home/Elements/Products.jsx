@@ -1,17 +1,25 @@
-import "./products.css";
+import { useEffect, useState } from "react";
+
 import useAuth from "../../../Hooks/useAuth";
+import useAllProducts from "../../../Hooks/useAllProducts";
+
 import Loader from "../../../Component/Loader/Loader";
 import ProdCom from "./ProdCom";
-import useAllProducts from "../../../Hooks/useAllProducts";
 import MyAccordion from "../../../Component/MyAccordion/MyAccordion";
 import Selection from "../../../Component/Selection/Selection";
 import MyPagination from "../../../Component/MyPagination/MyPagination";
 
+import "./products.css"; 
+
 const Products = () => {
   const { loading } = useAuth();
-  const { products } = useAllProducts();
+  const [currentPage, setCurrentPage] = useState(1);
+  const onPageChange = (page) => setCurrentPage(page);
+  const { products, isLoading } = useAllProducts(currentPage);
+  
+  useEffect(()=>{},[currentPage])
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Loader />;
   }
 
@@ -50,7 +58,11 @@ const Products = () => {
       </div>
 
       {/* pagination */}
-      <MyPagination />
+      <MyPagination
+        onPageChange={onPageChange}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };
