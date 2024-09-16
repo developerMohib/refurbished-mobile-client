@@ -1,23 +1,19 @@
 import "./products.css";
 import useAuth from "../../../Hooks/useAuth";
 import Loader from "../../../Component/Loader/Loader";
-import { useState } from "react";
-import { Pagination } from "flowbite-react";
 import ProdCom from "./ProdCom";
 import useAllProducts from "../../../Hooks/useAllProducts";
 import MyAccordion from "../../../Component/MyAccordion/MyAccordion";
 import Selection from "../../../Component/Selection/Selection";
+import MyPagination from "../../../Component/MyPagination/MyPagination";
 
 const Products = () => {
   const { loading } = useAuth();
   const { products } = useAllProducts();
-  const [currentPage, setCurrentPage] = useState(1);
-  console.log('products',products)
 
   if (loading) {
     return <Loader />;
   }
-  const onPageChange = (page) => setCurrentPage(page);
 
   return (
     <div className="px-4">
@@ -54,13 +50,7 @@ const Products = () => {
       </div>
 
       {/* pagination */}
-      <div className="flex overflow-x-auto sm:justify-center">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={""}
-          onPageChange={onPageChange}
-        />
-      </div>
+      <MyPagination />
     </div>
   );
 };
