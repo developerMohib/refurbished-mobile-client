@@ -9,6 +9,7 @@ import Blog from "../Pages/Blog/Blog";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Details from "../Component/Details/Details";
+import OldPhone from "../Pages/OldPhone/OldPhone";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/refurbished",
         element: <Refurbished />,
+      },
+      {
+        path: "/old",
+        element: <OldPhone />,
       },
       {
         path: "/blog",

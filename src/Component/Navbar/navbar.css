@@ -1,0 +1,15 @@
+.navlink{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color : #6b7280 ;
+    list-style-type: none;
+}
+.navlink:hover{
+    color : #111827 ;
+}
+
+.active{
+    border-bottom: 2px solid #6b7280 ;
+    padding-bottom: 8px;
+}

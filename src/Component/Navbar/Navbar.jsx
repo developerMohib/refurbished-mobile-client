@@ -1,10 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
-import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { Tooltip } from "react-tooltip";
+import "./navbar.css";
+import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -22,44 +23,64 @@ const Navbar = () => {
   const navbarLinks = (
     <>
       <li>
-        <Link
+        <NavLink
           to="/"
-          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+          className={({ isActive }) =>
+            isActive ? "navlink active" : "navlink"
+          }
         >
           Home
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/new-phone"
-          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+          className={({ isActive }) =>
+            isActive ? "navlink active" : "navlink"
+          }
         >
           New Phone
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/refurbished"
-          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+          className={({ isActive }) =>
+            isActive ? "navlink active" : "navlink"
+          }
         >
           Refurbished Phone
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
+          to="/old"
+          className={({ isActive }) =>
+            isActive ? "navlink active" : "navlink"
+          }
+        >
+          Old Phone
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/contact"
-          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+          className={({ isActive }) =>
+            isActive ? "navlink active" : "navlink"
+          }
         >
           Contact Us
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/blog"
-          className="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+          className={({ isActive }) =>
+            isActive ? "navlink active" : "navlink"
+          }
         >
           Blog
-        </Link>
+        </NavLink>
       </li>
     </>
   );
@@ -67,7 +88,7 @@ const Navbar = () => {
     <>
       <input
         type="text"
-        className="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+        className="w-full py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
         placeholder="Search"
       />
     </>
@@ -200,7 +221,7 @@ const Navbar = () => {
                         aria-label="close sidebar"
                         className="drawer-overlay"
                       ></label>
-                      <ul className="menu bg-base-200 text-base-content min-h-full flex  w-80 p-4">
+                      <ul className="menu bg-base-200 text-base-content min-h-full flex w-80 p-4">
                         {/* Sidebar content here */}
                         {navbarLinks}
                         {loginUser}
@@ -211,7 +232,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="hidden md:flex md:space-x-10 list-none">
+          <div className="hidden md:flex md:space-x-6 list-none">
             {navbarLinks}
           </div>
           <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">

@@ -13,13 +13,14 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sorting, setSoriting] = useState("");
   const [search, setSearch] = useState("");
-  console.log('setSearch',search)
+
 
   // Fetch products for the current page
   const { products, isLoading } = useAllProducts(
     currentPage,
     itemsPerPage,
-    sorting
+    sorting,
+    search
   );
 
   // Handle page change for pagination

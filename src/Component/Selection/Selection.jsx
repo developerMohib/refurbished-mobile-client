@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 
-const Selection = ({setSoriting, search, setSearch}) => {
+const Selection = ({ setSoriting, search, setSearch }) => {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [isSticky, setIsSticky] = useState(false);
+
+  const handleInputChange = (event) => {
+    event.preventDefault()
+    setSearch(event.target.value);
+  };
 
   const handleFindPhone = () => {
     const params = {
@@ -15,9 +20,7 @@ const Selection = ({setSoriting, search, setSearch}) => {
     // console.log('params ', params )
   };
   const handleSearchPhone = (e) => {
-e.preventDefault();
-const name = e.target.q.value;
-console.log(name, 'name')
+    e.preventDefault();
   };
   // To make menu of this web appliction.
   useEffect(() => {
@@ -117,7 +120,6 @@ console.log(name, 'name')
             <option value="lowhigh">Lowest to highesh </option>
           </select>
           {/* Display the selected sorting */}
-      
         </div>
 
         {/* searching */}
@@ -126,10 +128,15 @@ console.log(name, 'name')
             type="text"
             name="q"
             id="query"
+            value={search}
+            onChange={handleInputChange}
             placeholder="Type phone name"
             className="w-full p-3 rounded-md border-r-white rounded-r-none border-gray-300 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none "
           />
-          <button onClick={handleSearchPhone} className="inline-flex items-center gap-2 bg-green-500 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+          <button
+            onClick={handleSearchPhone}
+            className="inline-flex items-center gap-2 bg-green-500 text-white text-lg font-semibold py-3 px-6 rounded-r-md"
+          >
             <span className="block">
               <svg
                 className="text-gray-200 h-5 w-5 p-0 fill-current"

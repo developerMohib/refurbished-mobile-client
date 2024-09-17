@@ -3,25 +3,23 @@ import Loader from "../../Component/Loader/Loader";
 import useAuth from "../../Hooks/useAuth";
 import usePhone from "../../Hooks/usePhone";
 
-const Refurbished = () => {
+const OldPhone = () => {
   const { loading } = useAuth();
   const { phones, isLoading } = usePhone();
 
-  const refurbish = phones?.filter(
-    (mobile) => mobile.phoneRole === "refurbished"
-  );
-
+  const oldPhone = phones?.filter((mobile) => mobile.phoneRole === "old");
+ 
   if (isLoading || loading) {
     return <Loader />;
   }
 
-  if (!refurbish || refurbish.length === 0) {
+  if (!oldPhone || oldPhone.length === 0) {
     return <p>No new phones available.</p>;
   }
 
   return (
     <div className="md:grid grid-cols-4 gap-4 md:mt-14">
-      {refurbish?.map((product) => (
+      {oldPhone?.map((product) => (
         <div key={product._id} className="col-span-1">
           <Link
             to="/"
@@ -60,4 +58,4 @@ const Refurbished = () => {
   );
 };
 
-export default Refurbished;
+export default OldPhone;
