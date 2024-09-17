@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
 import Loader from "../../Component/Loader/Loader";
-import useAllProducts from "../../Hooks/useAllProducts";
 import useAuth from "../../Hooks/useAuth";
+import useNewPhone from "../../Hooks/useNewPhone";
 
 const NewPhone = () => {
   const { loading } = useAuth();
-  const { products, isLoading } = useAllProducts();
+  const { newPhone, isLoading } = useNewPhone();
+  const newPhones = newPhone?.filter((mobile) => mobile.phoneRole === "new");
+  console.log(newPhones)
   if (isLoading || loading) {
     <Loader />;
   }
   return (
     <div className="md:grid grid-cols-4 gap-4 md:mt-14">
-      {products?.slice(0, 12).map((product) => (
+      {newPhones?.map((product) => (
         <div key={product._id} className="col-span-1">
           <Link
             to="/"
@@ -27,7 +29,7 @@ const NewPhone = () => {
               className="h-80 w-full rounded-bl-3xl rounded-tr-3xl border border-gray-300 object-cover"
             />
 
-            <div className="p-4 text-center">
+            <div className="p-4">
               <strong className="text-xl font-medium text-gray-900">
                 {product.productName}
               </strong>
@@ -35,9 +37,14 @@ const NewPhone = () => {
               <p className="mt-2 text-pretty text-gray-700">
                 {product.description.slice(0, 70)}
               </p>
-              <p className="mt-2 text-pretty text-gray-700">
+              <div className="flex justify-around" >
+              <span className="mt-2 text-pretty text-gray-700">
                 Price : {product.price} BDT
-              </p>
+              </span>
+              <span className="mt-2 text-pretty text-gray-700">
+                Role : {product.phoneRole}
+              </span>
+              </div>
 
               <span className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
                 More

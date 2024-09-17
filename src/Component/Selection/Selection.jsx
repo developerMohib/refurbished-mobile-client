@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Selection = ({sorting, setSoriting}) => {
+const Selection = ({setSoriting, search, setSearch}) => {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [isSticky, setIsSticky] = useState(false);
@@ -13,6 +13,11 @@ const Selection = ({sorting, setSoriting}) => {
       category: category,
     };
     // console.log('params ', params )
+  };
+  const handleSearchPhone = (e) => {
+e.preventDefault();
+const name = e.target.q.value;
+console.log(name, 'name')
   };
   // To make menu of this web appliction.
   useEffect(() => {
@@ -124,7 +129,7 @@ const Selection = ({sorting, setSoriting}) => {
             placeholder="Type phone name"
             className="w-full p-3 rounded-md border-r-white rounded-r-none border-gray-300 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none "
           />
-          <button className="inline-flex items-center gap-2 bg-green-500 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+          <button onClick={handleSearchPhone} className="inline-flex items-center gap-2 bg-green-500 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
             <span className="block">
               <svg
                 className="text-gray-200 h-5 w-5 p-0 fill-current"
