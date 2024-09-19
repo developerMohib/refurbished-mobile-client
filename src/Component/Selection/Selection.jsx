@@ -1,24 +1,16 @@
 import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 
-const Selection = ({ setSoriting, search, setSearch }) => {
-  const [brand, setBrand] = useState("");
-  const [category, setCategory] = useState("");
+const Selection = ({ setBrand,setCategory, price,setPrice, setSoriting, search, setSearch,handleFindPhone }) => {
   const [isSticky, setIsSticky] = useState(false);
 
   const handleInputChange = (event) => {
     event.preventDefault()
-    setSearch(event.target.value);
+    const data = (event.target.value);
+    console.log('data',data)
+    setSearch(data)
   };
 
-  const handleFindPhone = () => {
-    const params = {
-      // list
-      price: priceRange,
-      brand: brand,
-      category: category,
-    };
-    // console.log('params ', params )
-  };
   const handleSearchPhone = (e) => {
     e.preventDefault();
   };
@@ -37,7 +29,6 @@ const Selection = ({ setSoriting, search, setSearch }) => {
     };
   }, []);
 
-  const [price, setPrice] = useState(500); // Initial price set to 500
 
   const updatePrice = (value) => {
     setPrice(value);
@@ -87,19 +78,19 @@ const Selection = ({ setSoriting, search, setSearch }) => {
               type="range"
               id="price-range"
               className="w-full"
-              min="0"
-              max="1000"
+              min="10000"
+              max="300000"
               value={price}
               onInput={(e) => updatePrice(e.target.value)}
             />
           </div>
           <div className="flex justify-between text-gray-500">
             <span id="minPrice">${price}</span>
-            <span id="maxPrice">$1000</span>
+            <span id="maxPrice">$300000</span>
           </div>
         </div>
         <div className="md:text-left text-center md:mb-0 mb-3">
-          <button className="bg-green-500 md:mt-0 mt-3 h-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button onClick={handleFindPhone} className="bg-green-500 md:mt-0 mt-3 h-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Find Phone
           </button>
         </div>
@@ -160,5 +151,14 @@ const Selection = ({ setSoriting, search, setSearch }) => {
     </div>
   );
 };
-
+Selection.propTypes ={
+  setBrand : PropTypes.func,
+  setCategory : PropTypes.func,
+  setSoriting : PropTypes.func,
+  search : PropTypes.string,
+  price : PropTypes.number,
+  setPrice : PropTypes.func,
+  setSearch : PropTypes.func,
+  handleFindPhone : PropTypes.func,
+}
 export default Selection;
