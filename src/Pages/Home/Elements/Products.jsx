@@ -8,11 +8,29 @@ import MyPagination from "../../../Component/MyPagination/MyPagination";
 import "./products.css";
 
 const Products = () => {
-  const itemsPerPage = 8; // Fixed the typo from "itemPerPage" to "itemsPerPage"
+  const itemsPerPage = 8; 
   const { loading } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [sorting, setSoriting] = useState("");
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [price, setPrice] = useState(10000);
+console.log('search', category)
+console.log('brand',brand)
+
+const handleFindPhone = () => {
+  const params = {
+    // list
+    price: price,
+    brand: brand,
+    category: category,
+  };
+  console.log('params ', params )
+};
+
+
+
 
 
   // Fetch products for the current page
@@ -36,10 +54,15 @@ const Products = () => {
       {/* Selection Component */}
       <div className="my-10 bg-gray-200 w-full sticky-section">
         <Selection
+        setBrand={setBrand}
+        setCategory={setCategory}
+        price={price}
+        setPrice={setPrice}
           sorting={sorting}
           setSoriting={setSoriting}
           search={search}
           setSearch={setSearch}
+          handleFindPhone={handleFindPhone}
         />
       </div>
 
