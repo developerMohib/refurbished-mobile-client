@@ -9,7 +9,7 @@ const useAllProducts = (page = 1, size, sorting, search) => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["product", page, size,sorting, search],
+    queryKey: ["product", page, size, sorting, search],
     queryFn: async () => {
       // here getting data
       try {

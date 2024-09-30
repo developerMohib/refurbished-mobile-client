@@ -8,7 +8,7 @@ const OldPhone = () => {
   const { phones, isLoading } = usePhone();
 
   const oldPhone = phones?.filter((mobile) => mobile.phoneRole === "old");
- 
+
   if (isLoading || loading) {
     return <Loader />;
   }

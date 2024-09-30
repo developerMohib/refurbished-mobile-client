@@ -1,4 +1,3 @@
-
 @media (min-width: 1024px) {
   .sticky-section {
     position: sticky;
@@ -9,6 +8,6 @@
 
   .sticky-section.is-sticky {
     background-color: #fff; /* or any color you prefer */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }

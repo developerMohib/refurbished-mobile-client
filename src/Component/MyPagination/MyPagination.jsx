@@ -4,8 +4,12 @@ import PropTypes from "prop-types";
 
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
-const MyPagination = ({ onPageChange, currentPage, setCurrentPage, itemsPerPage }) => {
-
+const MyPagination = ({
+  onPageChange,
+  currentPage,
+  setCurrentPage,
+  itemsPerPage,
+}) => {
   onPageChange = (page) => setCurrentPage(page);
   const axiosPublic = useAxiosPublic();
 
@@ -14,14 +18,14 @@ const MyPagination = ({ onPageChange, currentPage, setCurrentPage, itemsPerPage 
     queryFn: async () => {
       try {
         const res = await axiosPublic.get("/productCount");
-        const count = res?.data || 0 ;
+        const count = res?.data || 0;
         return count !== undefined ? { count } : {};
       } catch (error) {
         console.log(error);
       }
     },
   });
-  const totalProduct = data?.count?.count || 0 ;
+  const totalProduct = data?.count?.count || 0;
   // page per item
   const numberOfPage = Math?.ceil(totalProduct / itemsPerPage);
 
@@ -40,7 +44,7 @@ MyPagination.propTypes = {
   onPageChange: PropTypes.func,
   currentPage: PropTypes.number,
   setCurrentPage: PropTypes.func,
-  itemsPerPage : PropTypes.number
+  itemsPerPage: PropTypes.number,
 };
 
 export default MyPagination;

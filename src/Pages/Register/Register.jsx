@@ -11,7 +11,7 @@ const VITE_imgbb_api = import.meta.env.VITE_imgbb_api;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${VITE_imgbb_api}`;
 
 const Register = () => {
-  const { loading, createUser, updateUser} = useAuth();
+  const { loading, createUser, updateUser } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(true);
@@ -26,31 +26,30 @@ const Register = () => {
       const email = data?.email;
       const password = data?.password;
       const photo = { image: data?.photo[0] };
-  
+
       // User photo upload
       const imgResponse = await axiosPublic.post(img_hosting_api, photo, {
         headers: {
           "content-type": "multipart/form-data",
         },
       });
-  
+
       const photoURL = imgResponse.data.data.display_url;
-  
+
       // Register a user or create a user as a member
       const createUserResponse = await createUser(email, password);
-      console.log('User created:', createUserResponse);
-      toast.success('Log in Successful!');
-      navigate('/');
-  
+      console.log("User created:", createUserResponse);
+      toast.success("Log in Successful!");
+      navigate("/");
+
       // Update a user
       const updateUserResponse = await updateUser(name, photoURL);
-      console.log('Profile updated:', updateUserResponse);
+      console.log("Profile updated:", updateUserResponse);
     } catch (error) {
-      console.error('Error during registration:', error);
-      toast.error('Registration failed!');
+      console.error("Error during registration:", error);
+      toast.error("Registration failed!");
     }
   };
-  
 
   return (
     <div className="contain py-16">
@@ -79,23 +78,20 @@ const Register = () => {
             )}
           </div>
 
-        {/* User Email Here */}
+          {/* User Email Here */}
           <div className="space-y-2">
-          <label
-                htmlFor="email"
-                className="text-gray-600 mb-2 block"
-              ></label>
-              Email address
-              <input
-                name="email"
-                type="email"
-                placeholder="youremail.@domain.com"
-                className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400"
-                {...register("email", { required: "Email Address is required" })}
-              />
-              {errors.mail && (
-                <p className="text-red-600">{errors.mail?.message}</p>
-              )}
+            <label htmlFor="email" className="text-gray-600 mb-2 block"></label>
+            Email address
+            <input
+              name="email"
+              type="email"
+              placeholder="youremail.@domain.com"
+              className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400"
+              {...register("email", { required: "Email Address is required" })}
+            />
+            {errors.mail && (
+              <p className="text-red-600">{errors.mail?.message}</p>
+            )}
           </div>
 
           {/* User Password Here */}
@@ -104,7 +100,7 @@ const Register = () => {
               htmlFor="password"
               className="text-gray-600 mb-2 block"
             ></label>
-            Password 
+            Password
             <div className="relative">
               <input
                 {...register("password", {
@@ -143,7 +139,7 @@ const Register = () => {
           <div className="space-y-2">
             <label className="text-gray-600 my-2 block">My Photo</label>
             <input
-            {...register("photo")}
+              {...register("photo")}
               name="photo"
               type="file"
               accept="image/*"
@@ -159,7 +155,11 @@ const Register = () => {
               type="submit"
               className="block w-full py-2 text-center text-white bg-teal-500 border border-teal-500 rounded hover:bg-transparent hover:text-teal-500 transition uppercase font-roboto font-medium"
             >
-              {loading ? <ImSpinner9 className="animate-spin mx-auto " /> : "Register"}
+              {loading ? (
+                <ImSpinner9 className="animate-spin mx-auto " />
+              ) : (
+                "Register"
+              )}
             </button>
             <div className="flex gap-2 pt-5">
               <p className="text-gray-600 text-sm">Already have an account ?</p>

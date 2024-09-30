@@ -20,37 +20,36 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const email = data?.email;
-      const password = data?.password;      
+      const password = data?.password;
 
       // Log in a user as a member
       const createUserResponse = await loginEmailPass(email, password);
       console.log("User created:", createUserResponse);
       toast.success("Log in Successful!");
-      navigate( location.state ? location.state : '/')
+      navigate(location.state ? location.state : "/");
     } catch (error) {
       console.error("Error during registration:", error);
-      toast.error("Registration failed!");      
-      setLoading(false)
+      toast.error("Registration failed!");
+      setLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
       const result = await loginWithGoogle();
-      console.log(result.user);  
-      navigate(location.state ? location.state : '/');  
+      console.log(result.user);
+      navigate(location.state ? location.state : "/");
       Swal.fire({
-        icon: 'success',
+        icon: "success",
         title: "Success!",
-        text: 'You have logged in successfully!',
+        text: "You have logged in successfully!",
       });
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.error(error);
-      setLoading(false)
+      setLoading(false);
     }
   };
-  
 
   return (
     <div className="contain py-16">
@@ -64,21 +63,18 @@ const Login = () => {
 
           {/* User Email Here */}
           <div className="space-y-2">
-          <label
-                htmlFor="email"
-                className="text-gray-600 mb-2 block"
-              ></label>
-              Email address
-              <input
-                name="email"
-                type="email"
-                placeholder="youremail.@domain.com"
-                className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400"
-                {...register("email", { required: "Email Address is required" })}
-              />
-              {errors.mail && (
-                <p className="text-red-600">{errors.mail?.message}</p>
-              )}
+            <label htmlFor="email" className="text-gray-600 mb-2 block"></label>
+            Email address
+            <input
+              name="email"
+              type="email"
+              placeholder="youremail.@domain.com"
+              className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400"
+              {...register("email", { required: "Email Address is required" })}
+            />
+            {errors.mail && (
+              <p className="text-red-600">{errors.mail?.message}</p>
+            )}
           </div>
 
           {/* User Password Here */}
@@ -87,7 +83,7 @@ const Login = () => {
               htmlFor="password"
               className="text-gray-600 mb-2 block"
             ></label>
-            Password 
+            Password
             <div className="relative">
               <input
                 {...register("password", {
@@ -129,11 +125,18 @@ const Login = () => {
               type="submit"
               className="block w-full py-2 text-center text-white bg-teal-500 border border-teal-500 rounded hover:bg-transparent hover:text-teal-500 transition uppercase font-roboto font-medium"
             >
-              {loading ? <ImSpinner9 className="animate-spin mx-auto " /> : "Login"}
+              {loading ? (
+                <ImSpinner9 className="animate-spin mx-auto " />
+              ) : (
+                "Login"
+              )}
             </button>
             <p className="text-center my-3">Or</p>
 
-            <button onClick={handleGoogleLogin} className="block w-full py-2 text-center text-white bg-teal-500 border border-teal-500 rounded hover:bg-transparent hover:text-teal-500 transition uppercase font-roboto font-medium">
+            <button
+              onClick={handleGoogleLogin}
+              className="block w-full py-2 text-center text-white bg-teal-500 border border-teal-500 rounded hover:bg-transparent hover:text-teal-500 transition uppercase font-roboto font-medium"
+            >
               Login with google
             </button>
             <div className="flex gap-2 pt-5">

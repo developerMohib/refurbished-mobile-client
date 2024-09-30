@@ -28,7 +28,7 @@ const Service = () => {
             </h1>
 
             <p className="mt-2 text-gray-500 dark:text-gray-400">
-            Service and support for your refurbished Apple products.
+              Service and support for your refurbished Apple products.
             </p>
             <Link className="text-blue-600" to="/">
               Learn More
@@ -39,11 +39,11 @@ const Service = () => {
             <CiDeliveryTruck className="text-5xl" />
 
             <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-300">
-            Free next-day delivery
+              Free next-day delivery
             </h1>
 
             <p className="mt-2 text-gray-500 dark:text-gray-400">
-            On select in-stock Apple products ordered by 5:00 p.m.
+              On select in-stock Apple products ordered by 5:00 p.m.
             </p>
             <Link className="text-blue-600" to="/">
               Learn More

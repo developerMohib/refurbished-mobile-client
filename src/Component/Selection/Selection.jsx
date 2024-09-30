@@ -1,14 +1,23 @@
 import { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const Selection = ({ setBrand,setCategory, price,setPrice, setSoriting, search, setSearch,handleFindPhone }) => {
+const Selection = ({
+  setBrand,
+  setCategory,
+  price,
+  setPrice,
+  setSoriting,
+  search,
+  setSearch,
+  handleFindPhone,
+}) => {
   const [isSticky, setIsSticky] = useState(false);
 
   const handleInputChange = (event) => {
-    event.preventDefault()
-    const data = (event.target.value);
-    console.log('data',data)
-    setSearch(data)
+    event.preventDefault();
+    const data = event.target.value;
+    console.log("data", data);
+    setSearch(data);
   };
 
   const handleSearchPhone = (e) => {
@@ -28,7 +37,6 @@ const Selection = ({ setBrand,setCategory, price,setPrice, setSoriting, search, 
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
 
   const updatePrice = (value) => {
     setPrice(value);
@@ -90,7 +98,10 @@ const Selection = ({ setBrand,setCategory, price,setPrice, setSoriting, search, 
           </div>
         </div>
         <div className="md:text-left text-center md:mb-0 mb-3">
-          <button onClick={handleFindPhone} className="bg-green-500 md:mt-0 mt-3 h-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            onClick={handleFindPhone}
+            className="bg-green-500 md:mt-0 mt-3 h-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
             Find Phone
           </button>
         </div>
@@ -151,14 +162,14 @@ const Selection = ({ setBrand,setCategory, price,setPrice, setSoriting, search, 
     </div>
   );
 };
-Selection.propTypes ={
-  setBrand : PropTypes.func,
-  setCategory : PropTypes.func,
-  setSoriting : PropTypes.func,
-  search : PropTypes.string,
-  price : PropTypes.number,
-  setPrice : PropTypes.func,
-  setSearch : PropTypes.func,
-  handleFindPhone : PropTypes.func,
-}
+Selection.propTypes = {
+  setBrand: PropTypes.func,
+  setCategory: PropTypes.func,
+  setSoriting: PropTypes.func,
+  search: PropTypes.string,
+  price: PropTypes.number,
+  setPrice: PropTypes.func,
+  setSearch: PropTypes.func,
+  handleFindPhone: PropTypes.func,
+};
 export default Selection;
