@@ -16,8 +16,9 @@ const Products = () => {
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [price, setPrice] = useState(10000);
-  console.log("search", category);
-  console.log("brand", brand);
+  // console.log("search", category);
+  // console.log("brand", brand);
+  console.log("search", search);
 
   const handleFindPhone = () => {
     const params = {

@@ -7,21 +7,22 @@ const Selection = ({
   price,
   setPrice,
   setSoriting,
-  search,
   setSearch,
   handleFindPhone,
 }) => {
-  const [isSticky, setIsSticky] = useState(false);
+  const [ , setIsSticky] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
     event.preventDefault();
     const data = event.target.value;
     console.log("data", data);
-    setSearch(data);
+    setInputValue(data);
   };
 
   const handleSearchPhone = (e) => {
     e.preventDefault();
+    setSearch(inputValue);
   };
   // To make menu of this web appliction.
   useEffect(() => {
@@ -130,7 +131,7 @@ const Selection = ({
             type="text"
             name="q"
             id="query"
-            value={search}
+            value={inputValue}
             onChange={handleInputChange}
             placeholder="Type phone name"
             className="w-full p-3 rounded-md border-r-white rounded-r-none border-gray-300 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none "
