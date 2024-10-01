@@ -1,84 +1,35 @@
 import { Accordion } from "flowbite-react";
-import { Link } from "react-router-dom";
 
 const MyAccordion = () => {
   return (
     <Accordion>
       <Accordion.Panel>
-        <Accordion.Title>Models </Accordion.Title>
+        <Accordion.Title>What is a refurbished mobile phone? </Accordion.Title>
         <Accordion.Content>
-          <ul className="">
-            <p>
-              <Link> Iphone 15</Link>
-            </p>
-            <p>
-              <Link> Iphone 14</Link>
-            </p>
-            <p>
-              <Link> Iphone 13</Link>
-            </p>
-          </ul>
+          <p>A refurbished mobile phone is a pre-owned device that has been restored to full working condition by professionals. It undergoes rigorous testing, repairs (if necessary), and cleaning to ensure it functions like a new phone. Refurbished phones may come from returns, trade-ins, or slight cosmetic imperfections but are fully operational.</p>
         </Accordion.Content>
       </Accordion.Panel>
       <Accordion.Panel>
-        <Accordion.Title>Is there a Figma file available?</Accordion.Title>
+        <Accordion.Title>Is the quality of a refurbished phone guaranteed?</Accordion.Title>
         <Accordion.Content>
           <p className="mb-2 text-gray-500 dark:text-gray-400">
-            Flowbite is first conceptualized and designed using the Figma
-            software so everything you see in the library has a design
-            equivalent in our Figma file.
-          </p>
-          <p className="text-gray-500 dark:text-gray-400">
-            Check out the{" "}
-            <a
-              href="https://flowbite.com/figma/"
-              className="text-cyan-600 hover:underline dark:text-cyan-500"
-            >
-              Figma design system
-            </a>{" "}
-            based on the utility classes from Tailwind CSS and components from
-            Flowbite.
+          Yes, refurbished phones are tested extensively to meet quality standards. Most refurbished phones are sold with warranties, ranging from 6 months to 1 year, ensuring peace of mind. The device’s performance is checked thoroughly, and any defective parts are replaced before sale.
           </p>
         </Accordion.Content>
       </Accordion.Panel>
       <Accordion.Panel>
         <Accordion.Title>
-          What are the differences between Flowbite and Tailwind UI?
+        What’s the difference between refurbished and used mobile phones?
         </Accordion.Title>
         <Accordion.Content>
           <p className="mb-2 text-gray-500 dark:text-gray-400">
-            The main difference is that the core components from Flowbite are
-            open source under the MIT license, whereas Tailwind UI is a paid
-            product. Another difference is that Flowbite relies on smaller and
-            standalone components, whereas Tailwind UI offers sections of pages.
+          The main difference lies in testing and warranties. A refurbished phone has been inspected, repaired, and certified for resale, often including a warranty. Used phones are typically sold as-is without guarantees or repairs, and their condition is not always as thoroughly vetted.
           </p>
           <p className="mb-2 text-gray-500 dark:text-gray-400">
             However, we actually recommend using both Flowbite, Flowbite Pro,
             and even Tailwind UI as there is no technical reason stopping you
             from using the best of two worlds.
           </p>
-          <p className="mb-2 text-gray-500 dark:text-gray-400">
-            Learn more about these technologies:
-          </p>
-          <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
-            <li>
-              <a
-                href="https://flowbite.com/pro/"
-                className="text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                Flowbite Pro
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://tailwindui.com/"
-                rel="nofollow"
-                className="text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                Tailwind UI
-              </a>
-            </li>
-          </ul>
         </Accordion.Content>
       </Accordion.Panel>
     </Accordion>

@@ -13,7 +13,7 @@ const Banner = () => {
         <div className="text-left">
           <h2 className="text-4xl font-extrabold leading-10 tracking-tight text-gray-800 sm:text-5xl sm:leading-none md:text-6xl">
             Refurbished <br />
-            <span className="font-bold text-blue-500">Phone</span>
+            <span className="font-bold text-primary">Phone</span>
             <span className="text-xl font-semibold rounded-full text-blueGray-500 mx-1">
               fresh
             </span>
@@ -22,7 +22,7 @@ const Banner = () => {
             Discover what goes into each refurbished iPhone. <br />
           </p>
           <button
-            className="hover:underline text-blue-600"
+            className="hover:underline text-primary"
             onClick={() => document.getElementById("my_modal").showModal()}
           >
             see more
@@ -76,7 +76,7 @@ const Banner = () => {
             <div className="rounded-md shadow">
               <Link
                 to=" "
-                className="flex items-center justify-center w-full px-8 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-blue-500 border border-transparent rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue md:py-4 md:text-lg md:px-10"
+                className="flex items-center justify-center w-full px-8 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-primary border border-transparent rounded-md hover:bg-primary focus:outline-none focus:shadow-outline-blue md:py-4 md:text-lg md:px-10"
               >
                 Buying Phone
               </Link>
@@ -84,7 +84,7 @@ const Banner = () => {
             <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
               <Link
                 to=""
-                className="flex items-center justify-center w-full px-8 py-3 text-base font-medium leading-6 text-blue-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-blue-600 focus:outline-none focus:shadow-outline-blue md:py-4 md:text-lg md:px-10"
+                className="flex items-center justify-center w-full px-8 py-3 text-base font-medium leading-6 text-primary transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-primary focus:outline-none focus:shadow-outline-blue md:py-4 md:text-lg md:px-10"
               >
                 Selling Phone
               </Link>

@@ -51,7 +51,7 @@ const NewPhone = () => {
                   Price : {product.price} BDT
                 </p>
 
-                <span className="mt-4 text-center block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
+                <span className="mt-4 text-center block rounded-md border border-indigo-900 bg-primary px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
                   More
                 </span>
               </div>

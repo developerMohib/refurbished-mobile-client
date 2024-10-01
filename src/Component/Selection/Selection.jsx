@@ -101,7 +101,7 @@ const Selection = ({
         <div className="md:text-left text-center md:mb-0 mb-3">
           <button
             onClick={handleFindPhone}
-            className="bg-green-500 md:mt-0 mt-3 h-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-primary md:mt-0 mt-3 h-full hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
           >
             Find Phone
           </button>
@@ -138,7 +138,7 @@ const Selection = ({
           />
           <button
             onClick={handleSearchPhone}
-            className="inline-flex items-center gap-2 bg-green-500 text-white text-lg font-semibold py-3 px-6 rounded-r-md"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-green-500 text-white text-lg font-semibold py-3 px-6 rounded-r-md"
           >
             <span className="block">
               <svg

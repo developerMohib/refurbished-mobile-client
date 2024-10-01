@@ -38,7 +38,7 @@ const ProdCom = ({ product }) => {
             Release Date : {productCreationDateTime}
           </small>
 
-          <span className="mt-4 block rounded-md border border-indigo-900 bg-green-500 px-5 py-3 text-sm font-medium uppercase text-center tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
+          <span className="mt-4 block rounded-md border border-indigo-900 bg-primary px-5 py-3 text-sm font-medium uppercase text-center tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900">
             Details
           </span>
         </div>
