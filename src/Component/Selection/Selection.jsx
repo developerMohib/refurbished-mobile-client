@@ -168,7 +168,7 @@ Selection.propTypes = {
   setCategory: PropTypes.func,
   setSoriting: PropTypes.func,
   search: PropTypes.string,
-  price: PropTypes.number,
+  price: PropTypes.string,
   setPrice: PropTypes.func,
   setSearch: PropTypes.func,
   handleFindPhone: PropTypes.func,

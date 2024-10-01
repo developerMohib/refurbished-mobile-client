@@ -16,10 +16,7 @@ const Products = () => {
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [price, setPrice] = useState(10000);
-  // console.log("search", category);
-  // console.log("brand", brand);
-  console.log("search", search);
-
+  const [searchParams, setSearchParams] = useState()
   const handleFindPhone = () => {
     const params = {
       // list
@@ -27,7 +24,7 @@ const Products = () => {
       brand: brand,
       category: category,
     };
-    console.log("params ", params);
+    setSearchParams(params)
   };
 
   // Fetch products for the current page
@@ -35,7 +32,8 @@ const Products = () => {
     currentPage,
     itemsPerPage,
     sorting,
-    search
+    search,
+    searchParams
   );
 
   // Handle page change for pagination
