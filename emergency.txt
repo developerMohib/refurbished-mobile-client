@@ -1,0 +1,12 @@
+# firebase api_key
+VITE_apiKey=AIzaSyAN160UmOgnXVlogDUaCstlT6jLS5SB0NM
+VITE_authDomain=refurbished-phone.firebaseapp.com
+VITE_projectId=refurbished-phone
+VITE_storageBucket=refurbished-phone.appspot.com
+VITE_messagingSenderId=189390615019
+VITE_appId=1:189390615019:web:e09931c647b6066208a9a
+
+VITE_imgbb_api=1d799c3323cf67dfcdac97f18faa774a
+# VITE_baseUrl=http://localhost:8000
+
+VITE_baseUrl=https://refurbished-mobile-server.vercel.app
